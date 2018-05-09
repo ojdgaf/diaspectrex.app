@@ -5,10 +5,10 @@ import VueAxios from 'vue-axios';
 import routes from '@/router/routes'
 
 Vue.use(VueRouter)
-Vue.use(VueAxios, axios);
-Vue.axios.defaults.baseURL = 'http://api.diaspectrex.test';
+Vue.use(VueAxios, axios)
 
-// configure router
+Vue.axios.defaults.baseURL = 'http://api.diaspectrex.test'
+
 Vue.router = new VueRouter({
   routes,
   linkActiveClass: 'nav-item active'

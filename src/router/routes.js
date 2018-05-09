@@ -18,23 +18,28 @@ import Notifications from 'src/components/Dashboard/Views/Notifications.vue'
 const routes = [
   {
     path: '/',
+    name: 'Index',
     component: DashboardLayout,
-    redirect: '/login'
+    redirect: '/admin/overview',
+    meta: { auth: true }
   },
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    meta: { auth: false }
   },
   {
     path: '/register',
     name: 'Register',
-    component: Register
+    component: Register,
+    meta: { auth: false }
   },
   {
     path: '/admin',
     component: DashboardLayout,
     redirect: '/admin/overview',
+    meta: { auth: true },
     children: [
       {
         path: 'overview',
