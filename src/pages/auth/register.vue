@@ -1,75 +1,125 @@
 <template>
-  <div>
-    <h1>Register</h1>
+  <div class="login">
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="static/img/diaspectrex.jpg" alt="logo">
+      <div class="card-body">
+        <form v-on:submit.prevent="register()">
+          <fg-input placeholder="Email" v-model="user.email"></fg-input>
 
-    <form v-on:submit.prevent="register()">
-      <table><tr>
-        <td>Avatar</td>
-        <td><input v-on:change="setAvatar" type="file" /></td>
-        <tr>
-          <td>Username:</td>
-          <td><input v-model="data.body.username" /></td>
-        </tr><tr>
-          <td>Password:</td>
-          <td><input v-model="data.body.password" type="password" /></td>
-        </tr><tr>
-          <td></td>
-          <td><label><input v-model="data.autoLogin" type="checkbox" /> Auto Login</label></td>
-        </tr><tr>
-          <td></td>
-          <td><label><input v-model="data.rememberMe" type="checkbox" /> Remember Me</label></td>
-        </tr><tr>
-          <td></td>
-          <td><button type="submit">Register</button></td>
-        </tr></table>
+          <fg-input placeholder="First name" v-model="user.first_name"></fg-input>
 
-      <hr/>
+          <fg-input placeholder="Middle name" v-model="user.middle_name"></fg-input>
 
-      <div v-show="error" style="color:red; word-wrap:break-word;">{{ error | json }}</div>
-    </form>
+          <fg-input placeholder="Last name" v-model="user.last_name"></fg-input>
+
+          <p-radio v-model="user.sex" value="Male" label="Male">Male</p-radio>
+
+          <p-radio v-model="user.sex" value="Female" label="Female">Female</p-radio>
+
+          <fg-input placeholder="Birthday (YYYY-MM-DD)" v-model="user.birthday"></fg-input>
+
+          <fg-input placeholder="Password" v-model="user.password"></fg-input>
+
+          <fg-input placeholder="Confirm password" v-model="user.password_confirmation"></fg-input>
+
+          <p class="text-right">
+            <router-link :to="{ name: 'Login' }" class="small ml-auto my-auto">
+              already have an account? sign in
+            </router-link>
+          </p>
+
+          <div class="text-center">
+            <button class="btn bten-default mx-auto" type="submit">Sign up</button>
+          </div>
+
+          <p class="mt-5 mb-3 text-muted text-center">&copy; 2018 DiaSpectrEx</p>
+        </form>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
   export default {
-    data () {
+    data() {
       return {
-        context: 'register context',
-
-        data: {
-          body: {
-            username: '',
-            password: '',
-            avatar: null
-          },
-          autoLogin: false,
-          rememberMe: false
+        user: {
+          email: '',
+          first_name: '',
+          middle_name: '',
+          last_name: '',
+          password: '',
+          password_confirmation: '',
+          sex: 'Male',
+          birthday: ''
         },
-        formData: new FormData(),
-        error: null
       }
     },
     methods: {
       register () {
-        var formData = new FormData()
-        if (this.data.body.avatar) {
-          formData.append('avatar', this.data.body.avatar)
-        }
-        formData.append('username', this.data.body.username)
-        formData.append('password', this.data.body.password)
         this.$auth.register({
-          data: formData, // Axios
-          autoLogin: this.data.autoLogin,
-          rememberMe: this.data.rememberMe,
-          success: function () {
-            console.log('success ' + this.context)
-          },
-          error: function (res) {
-            console.log('error ' + this.context)
-            this.error = res.data
+          data: this.user,
+          autoLogin: true,
+          rememberMe: true,
+          redirect: {
+            name: 'Index'
           }
         })
       }
     }
   }
 </script>
+
+<style scoped>
+  .login {
+    height: 100%;
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    -ms-flex-align: center;
+    -ms-flex-pack: center;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
+  }
+
+  .form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+  }
+
+  .form-signin .checkbox {
+    font-weight: 400;
+  }
+
+  .form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .form-signin .form-control:focus {
+    z-index: 2;
+  }
+
+  .form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+</style>
+
