@@ -32,7 +32,7 @@
 
 <script>
   export default {
-    data() {
+    data () {
       return {
         context: 'register context',
 
@@ -47,28 +47,28 @@
         },
         formData: new FormData(),
         error: null
-      };
+      }
     },
     methods: {
-      register() {
-        var formData = new FormData();
+      register () {
+        var formData = new FormData()
         if (this.data.body.avatar) {
-          formData.append('avatar', this.data.body.avatar);
+          formData.append('avatar', this.data.body.avatar)
         }
-        formData.append('username', this.data.body.username);
-        formData.append('password', this.data.body.password);
+        formData.append('username', this.data.body.username)
+        formData.append('password', this.data.body.password)
         this.$auth.register({
           data: formData, // Axios
           autoLogin: this.data.autoLogin,
           rememberMe: this.data.rememberMe,
           success: function () {
-            console.log('success ' + this.context);
+            console.log('success ' + this.context)
           },
           error: function (res) {
-            console.log('error ' + this.context);
-            this.error = res.data;
+            console.log('error ' + this.context)
+            this.error = res.data
           }
-        });
+        })
       }
     }
   }
