@@ -6,6 +6,8 @@ import LightBootstrap from './light-bootstrap-main'
 // plugin setup
 Vue.use(LightBootstrap)
 
+Vue.config.productionTip = false
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

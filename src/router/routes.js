@@ -3,8 +3,8 @@ import DashboardLayout from '../components/Dashboard/Layout/DashboardLayout.vue'
 import NotFound from '../components/GeneralViews/NotFoundPage.vue'
 
 // Auth pages
-import Login from 'src/components/Auth/Login.vue'
-import Register from 'src/components/Auth/Register.vue'
+import Login from '@/pages/auth/login'
+import Register from '@/pages/auth/register'
 
 // Admin pages
 import Overview from 'src/components/Dashboard/Views/Overview.vue'
@@ -12,14 +12,14 @@ import UserProfile from 'src/components/Dashboard/Views/UserProfile.vue'
 import TableList from 'src/components/Dashboard/Views/TableList.vue'
 import Typography from 'src/components/Dashboard/Views/Typography.vue'
 import Icons from 'src/components/Dashboard/Views/Icons.vue'
-import Maps from 'src/components/Dashboard/Views/Maps.vue'
+// import Maps from 'src/components/Dashboard/Views/Maps.vue'
 import Notifications from 'src/components/Dashboard/Views/Notifications.vue'
 
 const routes = [
   {
     path: '/',
     component: DashboardLayout,
-    redirect: '/admin/overview'
+    redirect: '/login'
   },
   {
     path: '/login',
@@ -61,11 +61,11 @@ const routes = [
         name: 'Icons',
         component: Icons
       },
-      {
-        path: 'maps',
-        name: 'Maps',
-        component: Maps
-      },
+      // {
+      //   path: 'maps',
+      //   name: 'Maps',
+      //   component: Maps
+      // },
       {
         path: 'notifications',
         name: 'Notifications',
