@@ -3,12 +3,12 @@ import VueRouter from 'vue-router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import routes from '@/router/routes'
-import globals from '@/GlobalVariables'
+import GlobalVariables from '@/globalVariables'
 
 Vue.use(VueRouter)
 Vue.use(VueAxios, axios)
 
-Vue.axios.defaults.baseURL = globals.urls.api
+Vue.axios.defaults.baseURL = GlobalVariables.urls.api
 
 Vue.router = new VueRouter({
   routes,
