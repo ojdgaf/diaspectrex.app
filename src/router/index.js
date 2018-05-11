@@ -3,11 +3,12 @@ import VueRouter from 'vue-router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import routes from '@/router/routes'
+import globals from '@/GlobalVariables'
 
 Vue.use(VueRouter)
 Vue.use(VueAxios, axios)
 
-Vue.axios.defaults.baseURL = 'http://api.diaspectrex.test'
+Vue.axios.defaults.baseURL = globals.urls.api
 
 Vue.router = new VueRouter({
   routes,

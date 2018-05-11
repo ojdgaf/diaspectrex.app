@@ -9,7 +9,7 @@
           <fg-input placeholder="Password" v-model="credentials.password"></fg-input>
 
           <p class="text-right">
-            <router-link :to="{ name: 'Password.request' }" class="small ml-auto my-auto">
+            <router-link :to="{ name: 'Password request' }" class="small ml-auto my-auto">
               forgot password
             </router-link>
           </p>

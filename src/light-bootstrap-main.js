@@ -5,6 +5,8 @@ import Notifications from 'vue-notifyjs'
 import GlobalComponents from './globalComponents'
 // A plugin file where you could register global directives
 import GlobalDirectives from './globalDirectives'
+// Object in Vue prototype where you could register global variables
+import GlobalVariables from '@/globalVariables'
 // Sidebar on the right. Used as a local plugin in DashboardLayout.vue
 import SideBar from './components/UIComponents/SidebarPlugin'
 
@@ -27,5 +29,6 @@ export default {
     Vue.use(SideBar)
     Vue.use(Notifications)
     Vue.use(VTooltip)
+    Vue.prototype.globals = GlobalVariables
   }
 }

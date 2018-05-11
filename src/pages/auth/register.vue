@@ -4,23 +4,25 @@
       <img class="card-img-top" src="static/img/diaspectrex.jpg" alt="logo">
       <div class="card-body">
         <form v-on:submit.prevent="register()">
-          <fg-input placeholder="Email" v-model="user.email"></fg-input>
+          <fg-input v-model="payload.email" placeholder="Email"></fg-input>
 
-          <fg-input placeholder="First name" v-model="user.first_name"></fg-input>
+          <fg-input v-model="payload.first_name" placeholder="First name"></fg-input>
 
-          <fg-input placeholder="Middle name" v-model="user.middle_name"></fg-input>
+          <fg-input v-model="payload.middle_name" placeholder="Middle name"></fg-input>
 
-          <fg-input placeholder="Last name" v-model="user.last_name"></fg-input>
+          <fg-input v-model="payload.last_name" placeholder="Last name"></fg-input>
 
-          <p-radio v-model="user.sex" value="Male" label="Male">Male</p-radio>
+          <p-radio v-model="payload.sex" value="Male" label="Male">Male</p-radio>
 
-          <p-radio v-model="user.sex" value="Female" label="Female">Female</p-radio>
+          <p-radio v-model="payload.sex" value="Female" label="Female">Female</p-radio>
 
-          <fg-input placeholder="Birthday (YYYY-MM-DD)" v-model="user.birthday"></fg-input>
+          <fg-input v-model="payload.birthday" placeholder="Birthday (YYYY-MM-DD)"></fg-input>
 
-          <fg-input placeholder="Password" v-model="user.password"></fg-input>
+          <fg-input v-model="payload.password" :type="passwordFieldType" placeholder="Password"></fg-input>
 
-          <fg-input placeholder="Confirm password" v-model="user.password_confirmation"></fg-input>
+          <fg-input v-model="payload.password_confirmation" :type="passwordFieldType" placeholder="Confirm password"></fg-input>
+
+          <button type="button" @click="switchVisibility">show / hide</button>
 
           <p class="text-right">
             <router-link :to="{ name: 'Login' }" class="small ml-auto my-auto">
@@ -29,7 +31,7 @@
           </p>
 
           <div class="text-center">
-            <button class="btn bten-default mx-auto" type="submit">Sign up</button>
+            <button class="btn btn-default mx-auto" type="submit">Sign up</button>
           </div>
 
           <p class="mt-5 mb-3 text-muted text-center">&copy; 2018 DiaSpectrEx</p>
@@ -43,7 +45,8 @@
   export default {
     data() {
       return {
-        user: {
+        passwordFieldType: 'password',
+        payload: {
           email: '',
           first_name: '',
           middle_name: '',
@@ -56,9 +59,12 @@
       }
     },
     methods: {
+      switchVisibility () {
+        this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password'
+      },
       register () {
         this.$auth.register({
-          data: this.user,
+          data: this.payload,
           autoLogin: true,
           rememberMe: true,
           redirect: {

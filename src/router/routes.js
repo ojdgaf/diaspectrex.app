@@ -5,6 +5,8 @@ import NotFound from '../components/GeneralViews/NotFoundPage.vue'
 // Auth pages
 import Login from '@/pages/auth/login'
 import Register from '@/pages/auth/register'
+import PasswordRequest from '@/pages/auth/password/request'
+import PasswordReset from '@/pages/auth/password/reset'
 
 // Admin pages
 import Overview from 'src/components/Dashboard/Views/Overview.vue'
@@ -33,6 +35,18 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register,
+    meta: { auth: false }
+  },
+  {
+    path: '/password/reset',
+    name: 'Password request',
+    component: PasswordRequest,
+    meta: { auth: false }
+  },
+  {
+    path: '/password/reset/:token',
+    name: 'Password reset',
+    component: PasswordReset,
     meta: { auth: false }
   },
   {

@@ -1,0 +1,96 @@
+<template>
+  <div>
+    <div class="login">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <form v-on:submit.prevent="sendResetLinkEmail()">
+            <fg-input v-model="payload.email" placeholder="Email"></fg-input>
+
+            <div class="text-center">
+              <button class="btn btn-default mx-auto" type="submit">Send reset link</button>
+            </div>
+
+            <p class="mt-5 mb-3 text-muted text-center">&copy; 2018 DiaSpectrEx</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        payload: {
+          email: 'a@a.a',
+        }
+      }
+    },
+    methods: {
+      sendResetLinkEmail () {
+        this.axios.post('auth/password/email', this.payload)
+          .then(response => {
+            this.payload.email = ''
+            this.$notify(this.globals.notifications.success('We have e-mailed your password reset link'))
+          })
+          .catch(error => {
+            this.$notify(this.globals.notifications.error('Oops, we could not send you an email!'))
+          })
+      }
+    }
+  }
+</script>
+
+<style scoped>
+  .login {
+    height: 100%;
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    -ms-flex-align: center;
+    -ms-flex-pack: center;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
+  }
+
+  .form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+  }
+
+  .form-signin .checkbox {
+    font-weight: 400;
+  }
+
+  .form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .form-signin .form-control:focus {
+    z-index: 2;
+  }
+
+  .form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+</style>

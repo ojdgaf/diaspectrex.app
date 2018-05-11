@@ -55,7 +55,7 @@
             <a class="dropdown-item" href="#">Separated link</a>
           </drop-down>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a @click="logout()" href="#" class="nav-link">
               Log out
             </a>
           </li>
@@ -78,6 +78,15 @@
       }
     },
     methods: {
+      logout () {
+        this.$auth.logout({
+          makeRequest: false,
+          redirect: {
+            name: 'Login'
+          }
+        })
+      },
+
       capitalizeFirstLetter (string) {
         return string.charAt(0).toUpperCase() + string.slice(1)
       },

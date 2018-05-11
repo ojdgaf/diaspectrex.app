@@ -28,7 +28,7 @@
     </drop-down>
 
     <li class="nav-item">
-      <a class="nav-link" href="#pablo">
+      <a @click="logout()" href="#" class="nav-link">
         <span class="no-icon">Log out</span>
       </a>
     </li>
@@ -40,6 +40,16 @@
   export default {
     components: {
       DropDown
+    },
+    methods: {
+      logout () {
+        this.$auth.logout({
+          makeRequest: false,
+          redirect: {
+            name: 'Login'
+          }
+        })
+      }
     }
   }
 </script>
