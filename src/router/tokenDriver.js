@@ -1,8 +1,8 @@
 module.exports = {
-  request: function (req, token) {
-    this.options.http._setHeaders.call(this, req, {Authorization: 'Bearer ' + token})
+  request: function (request, token) {
+    this.options.http._setHeaders.call(this, request, {Authorization: 'Bearer ' + token})
   },
-  response: function (res) {
-    return (res.data || {}).access_token
+  response: function (response) {
+    return (response.data.data || {}).access_token
   }
 }
