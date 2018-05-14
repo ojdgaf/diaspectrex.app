@@ -19,7 +19,8 @@ Vue.use(require('@websanova/vue-auth'), {
   auth: require('@/router/tokenDriver'),
   http: require('@websanova/vue-auth/drivers/http/axios.1.x.js'),
   router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js'),
-  tokenDefaultName: 'access_token'
+  tokenDefaultName: 'access_token',
+  rolesVar: 'roleNames'
 })
 
 export default Vue.router
