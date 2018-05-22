@@ -1,4 +1,6 @@
 import VTooltip from 'v-tooltip'
+// A small wrapper for integrating lodash to Vuejs
+import VueLodash from 'vue-lodash'
 // Notifications plugin
 import Notifications from 'vue-notifyjs'
 // A plugin file where you could register global components used across the app
@@ -6,7 +8,7 @@ import GlobalComponents from './globalComponents'
 // A plugin file where you could register global directives
 import GlobalDirectives from './globalDirectives'
 // Object in Vue prototype where you could register global variables
-import GlobalVariables from '@/globalVariables'
+import Globals from '@/globals'
 // Sidebar on the right. Used as a local plugin in DashboardLayout.vue
 import SideBar from './components/UIComponents/SidebarPlugin'
 
@@ -29,6 +31,7 @@ export default {
     Vue.use(SideBar)
     Vue.use(Notifications)
     Vue.use(VTooltip)
-    Vue.prototype.globals = GlobalVariables
+    Vue.use(VueLodash)
+    Vue.use(Globals)
   }
 }
