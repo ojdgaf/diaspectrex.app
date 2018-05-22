@@ -29,11 +29,11 @@
         align-items: center;
     }
 
-    .title-wrapper button > a {
+    .title-wrapper > a {
         color: #87CB16;
     }
 
-    .title-wrapper button:hover > a {
+    .title-wrapper > a:hover {
         color: #049F0C;
     }
 </style>

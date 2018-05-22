@@ -12,9 +12,19 @@
                             <h4 class="card-title">Create hospital</h4>
                         </template>
                         <div class="col-12">
-                            <form action="">
-
-                            </form>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Name:</label>
+                                    <input type="text" v-model="hospital.name" class="form-control" placeholder="Name...">
+                                </div>
+                                <div class="form-group">
+                                    <label>Description:</label>
+                                    <input type="text" v-model="hospital.name" class="form-control" placeholder="Name...">
+                                </div>
+                                <div class="form-group">
+                                    <label></label>
+                                </div>
+                            </div>
                         </div>
                     </card>
                 </div>
@@ -34,7 +44,11 @@
         },
         data () {
             return {
-
+                hospital: {
+                    name: '',
+                    description: '',
+                    address_id: ''
+                }
             }
         }
     }
