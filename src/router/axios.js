@@ -16,10 +16,10 @@ const customAxios = {
         const response = error.response
           
           // inform user via notification
-        ;(new Vue()).$notify(Vue.$notice.error(
+        ;(new Vue()).$unfortunately(
           // hide a message of unexpected error from user
           response.status === 500 ? 'Sorry, something went wrong' : response.data.message
-        ))
+        )
         
         return Promise.reject(response);
       }

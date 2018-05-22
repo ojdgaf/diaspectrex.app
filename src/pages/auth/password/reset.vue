@@ -41,7 +41,7 @@
       },
       reset () {
         if (! this.checkPasswordConformation()) {
-          this.$notify(this.globals.notifications.error('The password confirmation does not match'))
+          this.$unfortunately('The password confirmation does not match')
           this.payload.password_confirmation = ''
           return
         }
@@ -56,9 +56,7 @@
           .then(response => {
             this.login()
           })
-          .catch(error => {
-            this.$notify(this.globals.notifications.error('Oops, we could not reset your password!'))
-          })
+          .catch(error => {})
       },
       login () {
         this.$auth.login({
@@ -67,7 +65,8 @@
           fetchUser: true,
           redirect: {
             name: 'Index'
-          }
+          },
+          error: function () {}
         })
       }
     }

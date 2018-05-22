@@ -36,8 +36,8 @@
     data() {
       return {
         credentials: {
-          email: 'a@a.a',
-          password: '123456'
+          email: 'bu@dx.com',
+          password: 'secret'
         }
       }
     },
@@ -49,7 +49,8 @@
           fetchUser: true,
           redirect: {
             name: 'Index'
-          }
+          },
+          error: function () {}
         })
       }
     }

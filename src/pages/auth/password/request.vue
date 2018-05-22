@@ -32,11 +32,9 @@
         this.axios.post('auth/password/email', this.payload)
           .then(response => {
             this.payload.email = ''
-            this.$notify(this.globals.notifications.success('We have e-mailed your password reset link'))
+            this.$successfully(response.message)
           })
-          .catch(error => {
-            this.$notify(this.globals.notifications.error('Oops, we could not send you an email!'))
-          })
+          .catch(error => {})
       }
     }
   }

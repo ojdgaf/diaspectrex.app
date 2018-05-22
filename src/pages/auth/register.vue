@@ -69,7 +69,8 @@
           rememberMe: true,
           redirect: {
             name: 'Index'
-          }
+          },
+          error: function () {}
         })
       }
     }
