@@ -8,7 +8,16 @@ import Register from '@/pages/auth/register'
 import PasswordRequest from '@/pages/auth/password/request'
 import PasswordReset from '@/pages/auth/password/reset'
 
+// Management pages
+import ManagementMain from '@/pages/management/main.vue'
+
+// Management of users
+import UsersIndex from '@/pages/management/users/index.vue'
+import UsersCreate from '@/pages/management/users/create.vue'
+import UsersEdit from '@/pages/management/users/edit.vue'
+
 // Admin pages
+import Test from '@/pages/test.vue'
 import Overview from 'src/components/Dashboard/Views/Overview.vue'
 import UserProfile from 'src/components/Dashboard/Views/UserProfile.vue'
 import TableList from 'src/components/Dashboard/Views/TableList.vue'
@@ -19,11 +28,9 @@ import Notifications from 'src/components/Dashboard/Views/Notifications.vue'
 
 const routes = [
   {
-    path: '/',
-    name: 'Index',
-    component: DashboardLayout,
-    redirect: '/admin/overview',
-    meta: { auth: true }
+    path: '/test',
+    name: 'Test',
+    component: Test,
   },
   {
     path: '/login',
@@ -50,15 +57,39 @@ const routes = [
     meta: { auth: false }
   },
   {
-    path: '/admin',
+    path: '/',
+    name: 'Index',
     component: DashboardLayout,
-    redirect: '/admin/overview',
     meta: { auth: true },
     children: [
       {
         path: 'overview',
         name: 'Overview',
         component: Overview
+      },
+      
+      // management
+      {
+        path: 'management',
+        name: 'management',
+        component: ManagementMain
+      },
+      {
+        path: 'management/users',
+        name: 'users.index',
+        component: UsersIndex
+      },
+      {
+        path: 'management/users/create',
+        name: 'users.create',
+        component: UsersCreate,
+        props: true
+      },
+      {
+        path: 'management/users/:id/edit',
+        name: 'users.edit',
+        component: UsersEdit,
+        props: true
       },
       {
         path: 'user',
