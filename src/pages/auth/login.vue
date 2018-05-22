@@ -33,16 +33,16 @@
 
 <script>
   export default {
-    data() {
+    data () {
       return {
         credentials: {
-          email: 'a@a.a',
-          password: '123456'
+          email: 'bu@dx.com',
+          password: 'secret'
         }
       }
     },
     methods: {
-      login() {
+      login () {
         this.$auth.login({
           data: this.credentials,
           rememberMe: true,

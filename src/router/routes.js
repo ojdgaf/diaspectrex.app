@@ -17,89 +17,110 @@ import Icons from 'src/components/Dashboard/Views/Icons.vue'
 // import Maps from 'src/components/Dashboard/Views/Maps.vue'
 import Notifications from 'src/components/Dashboard/Views/Notifications.vue'
 
+// Hospitals
+import AllHospitals from '@/pages/hospitals/all'
+import CreateHospital from '@/pages/hospitals/create'
+import EditHospital from '@/pages/hospitals/edit'
+
 const routes = [
-  {
-    path: '/',
-    name: 'Index',
-    component: DashboardLayout,
-    redirect: '/admin/overview',
-    meta: { auth: true }
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: Login,
-    meta: { auth: false }
-  },
-  {
-    path: '/register',
-    name: 'Register',
-    component: Register,
-    meta: { auth: false }
-  },
-  {
-    path: '/password/reset',
-    name: 'Password request',
-    component: PasswordRequest,
-    meta: { auth: false }
-  },
-  {
-    path: '/password/reset/:token',
-    name: 'Password reset',
-    component: PasswordReset,
-    meta: { auth: false }
-  },
-  {
-    path: '/admin',
-    component: DashboardLayout,
-    redirect: '/admin/overview',
-    meta: { auth: true },
-    children: [
-      {
-        path: 'overview',
-        name: 'Overview',
-        component: Overview
-      },
-      {
-        path: 'user',
-        name: 'User',
-        component: UserProfile
-      },
-      {
-        path: 'table-list',
-        name: 'Table List',
-        component: TableList
-      },
-      {
-        path: 'typography',
-        name: 'Typography',
-        component: Typography
-      },
-      {
-        path: 'icons',
-        name: 'Icons',
-        component: Icons
-      },
-      // {
-      //   path: 'maps',
-      //   name: 'Maps',
-      //   component: Maps
-      // },
-      {
-        path: 'notifications',
-        name: 'Notifications',
-        component: Notifications
-      }
-    ]
-  },
-  { path: '*', component: NotFound }
+    {
+        path: '/',
+        name: 'Index',
+        component: DashboardLayout,
+        redirect: '/admin/overview',
+        meta: {auth: true}
+    },
+    {
+        path: '/login',
+        name: 'Login',
+        component: Login,
+        meta: {auth: false}
+    },
+    {
+        path: '/register',
+        name: 'Register',
+        component: Register,
+        meta: {auth: false}
+    },
+    {
+        path: '/password/reset',
+        name: 'Password request',
+        component: PasswordRequest,
+        meta: {auth: false}
+    },
+    {
+        path: '/password/reset/:token',
+        name: 'Password reset',
+        component: PasswordReset,
+        meta: {auth: false}
+    },
+    {
+        path: '/admin',
+        component: DashboardLayout,
+        redirect: '/admin/overview',
+        // TODO change to true on prod
+        meta: {auth: true},
+        children: [
+            {
+                path: 'overview',
+                name: 'Overview',
+                component: Overview
+            },
+            {
+                path: 'user',
+                name: 'User',
+                component: UserProfile
+            },
+            {
+                path: 'table-list',
+                name: 'Table List',
+                component: TableList
+            },
+            {
+                path: 'typography',
+                name: 'Typography',
+                component: Typography
+            },
+            {
+                path: 'icons',
+                name: 'Icons',
+                component: Icons
+            },
+            // {
+            //   path: 'maps',
+            //   name: 'Maps',
+            //   component: Maps
+            // },
+            {
+                path: 'notifications',
+                name: 'Notifications',
+                component: Notifications
+            },
+            {
+                path: 'hospitals',
+                name: 'hospitals.index',
+                component: AllHospitals
+            },
+            {
+                path: 'hopitals/create',
+                name: 'hospitals.create',
+                component: CreateHospital
+            },
+            {
+                path: 'hospitals/:hospital/edit',
+                name: 'hospitals.edit',
+                component: EditHospital
+            }
+        ]
+    },
+    {path: '*', component: NotFound}
 ]
 
 /**
  * Asynchronously load view (Webpack Lazy loading compatible)
  * The specified component must be inside the Views folder
  * @param  {string} name  the filename (basename) of the view to load.
-function view(name) {
+ function view(name) {
    var res= require('../components/Dashboard/Views/' + name + '.vue');
    return res;
 };**/

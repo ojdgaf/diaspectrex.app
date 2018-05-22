@@ -1,6 +1,6 @@
 export default {
   urls: {
-    api: 'http://api.diaspectrex.test'
+    api: 'http://127.0.0.1:8080'
   },
   notifications: {
     success: function (text) {

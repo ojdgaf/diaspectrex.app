@@ -30,6 +30,11 @@
         <i class="nc-icon nc-bell-55"></i>
         <p>Notifications</p>
       </sidebar-link>
+
+      <sidebar-link to="/admin/hospitals">
+        <i class="nc-icon nc-ambulance"></i>
+        <p>Hospitals</p>
+      </sidebar-link>
     </side-bar>
     <div class="main-panel">
       <top-navbar></top-navbar>
