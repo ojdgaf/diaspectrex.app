@@ -33,7 +33,7 @@
 
 <script>
   export default {
-    data() {
+    data () {
       return {
         credentials: {
           email: 'bu@dx.com',
@@ -42,7 +42,7 @@
       }
     },
     methods: {
-      login() {
+      login () {
         this.$auth.login({
           data: this.credentials,
           rememberMe: true,
