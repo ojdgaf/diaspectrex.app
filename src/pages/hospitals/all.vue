@@ -31,7 +31,10 @@
                                         <td>{{ hospital.id }}</td>
                                         <td>{{ hospital.name }}</td>
                                         <td>{{ hospital.desciption }}</td>
-                                        <td>{{ hospital.address.full }}</td>
+                                        <td>
+                                            <span v-if="hospital.address">{{ hospital.address.full }}</span>
+                                            <span v-else>Unknown</span>
+                                        </td>
                                         <td class="text-center">
                                             <div class="text-left">
                                                 <button class="btn btn-info">
@@ -56,15 +59,9 @@
 </template>
 
 <script>
-    import Card from 'src/components/UIComponents/Cards/Card'
-    import axios from 'axios'
-    import Breadcrumbs from 'src/components/UIComponents/Breadcrumbs'
-    import TitleBlock from 'src/components/UIComponents/TitleBlock'
+    import swal from 'vue-sweetalert2'
 
     export default {
-        components: {
-            Card, Breadcrumbs, TitleBlock
-        },
         data () {
             return {
                 hospitals: null
@@ -75,16 +72,19 @@
         },
         methods: {
             async getHospitals () {
-                const response = await axios.get('/hospitals');
+                const response = await this.axios.get('/hospitals');
 
-                return response.data.data;
+                return response.data;
             },
             async deleteHospital(id) {
-                const response = await axios.delete(`/hospitals/${id}`);
+                const response = await this.axios.delete(`/hospitals/${id}`);
 
-                if (response.data.success){
+                if (response.success){
+                    this.$successfully('Hospital was successfully deleted!');
                     this.getHospitals().then(hospitals => this.hospitals = hospitals);
                 }
+                else
+                    this.$unfortunately('Error occurs when trying to delete hospital!');
             }
         }
     }

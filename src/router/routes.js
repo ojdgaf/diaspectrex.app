@@ -22,13 +22,12 @@ import UserProfile from 'src/components/Dashboard/Views/UserProfile.vue'
 import TableList from 'src/components/Dashboard/Views/TableList.vue'
 import Typography from 'src/components/Dashboard/Views/Typography.vue'
 import Icons from 'src/components/Dashboard/Views/Icons.vue'
-// import Maps from 'src/components/Dashboard/Views/Maps.vue'
 import Notifications from 'src/components/Dashboard/Views/Notifications.vue'
 
 // Hospitals
-import AllHospitals from '@/pages/hospitals/all'
-import CreateHospital from '@/pages/hospitals/create'
-import EditHospital from '@/pages/hospitals/edit'
+import HospitalsIndex from '@/pages/hospitals/all'
+import HospitalsCreate from '@/pages/hospitals/create'
+import HospitalsEdit from '@/pages/hospitals/edit'
 
 const routes = [
   {
@@ -128,17 +127,19 @@ const routes = [
       {
         path: 'hospitals',
         name: 'hospitals.index',
-        component: AllHospitals
+        component: HospitalsIndex
       },
       {
         path: 'hospitals/create',
         name: 'hospitals.create',
-        component: CreateHospital
+        component: HospitalsCreate,
+        props: true
       },
       {
         path: 'hospitals/:hospital/edit',
         name: 'hospitals.edit',
-        component: EditHospital
+        component: HospitalsEdit,
+        prods: true
       }
     ]
   },

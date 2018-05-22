@@ -27,8 +27,13 @@
         <p>Notifications</p>
       </sidebar-link>
 
+      <sidebar-link to="/admin/management/users">
+        <i class="fa fa-users"></i>
+        <p>Users</p>
+      </sidebar-link>
+
       <sidebar-link to="/admin/hospitals">
-        <i class="nc-icon nc-ambulance"></i>
+        <i class="fa fa-hospital-o"></i>
         <p>Hospitals</p>
       </sidebar-link>
     </side-bar>

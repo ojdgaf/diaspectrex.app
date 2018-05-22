@@ -1,10 +1,14 @@
-import Vue from 'vue'
-import router from '@/router'
-import App from '@/App.vue'
-import LightBootstrap from '@/light-bootstrap-main'
+import Vue from 'vue';
+import router from '@/router';
+import App from '@/App.vue';
+import LightBootstrap from '@/light-bootstrap-main';
+
+import wysiwyg from 'vue-wysiwyg'
 
 // plugin setup
-Vue.use(LightBootstrap)
+Vue.use(LightBootstrap);
+
+Vue.use(wysiwyg, {});
 
 Vue.config.productionTip = false
 
