@@ -5,11 +5,11 @@ const Globals = {
   }
 }
 
-// return objects that are used by vue-notifyjs $notify method
+// add notifications functions (using vue-notifyjs)
 function installNotice (Vue) {
-  const $notice = {
-    success (text = 'Successfully completed') {
-      return {
+  const notifications = {
+    successfully (text = 'Successfully completed') {
+      this.$notify({
         component: {
           template: `<span>${text}</span>`
         },
@@ -17,10 +17,10 @@ function installNotice (Vue) {
         horizontalAlign: 'right',
         verticalAlign: 'bottom',
         type: 'success'
-      }
+      })
     },
-    error (text = 'Oops, some error occurred!') {
-      return {
+    unfortunately (text = 'Oops, some error occurred!') {
+      this.$notify({
         component: {
           template: `<span>${text}</span>`
         },
@@ -28,24 +28,20 @@ function installNotice (Vue) {
         horizontalAlign: 'right',
         verticalAlign: 'bottom',
         type: 'danger'
-      }
+      })
     }
   }
   
-  Object.defineProperty(Vue, '$notice', {
-    get () {
-      return $notice
-    }
+  Object.defineProperty(Vue.prototype, '$successfully', {
+    value: notifications.successfully
   })
   
-  Object.defineProperty(Vue.prototype, '$notice', {
-    get () {
-      return $notice
-    }
+  Object.defineProperty(Vue.prototype, '$unfortunately', {
+    value: notifications.unfortunately
   })
 }
 
-// return user object wrapper that contains helpful methods
+// add user object wrapper that contains helpful methods
 function installUser (Vue) {
   const $user = (underlying) => {
     let user = Vue._.cloneDeep(underlying)
