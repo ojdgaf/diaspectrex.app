@@ -1,12 +1,40 @@
 const Globals = {
   install (Vue) {
-    installNotice(Vue)
+    installAlerts(Vue)
+    installNotifications(Vue)
     installUser(Vue)
   }
 }
 
+// add alert functions (using vue-sweetalert2)
+function installAlerts (Vue) {
+  const alerts = {
+    confirmation: {
+      title: 'Are you sure?',
+      text: '',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, do it',
+      cancelButtonText: 'No, cancel!',
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger',
+      buttonsStyling: false
+    }
+  }
+  
+  function $askForConfirmation (text = 'You won\'t be able to revert this!') {
+    alerts.confirmation.text = text
+    
+    return this.$swal(alerts.confirmation).then(result => !! result.value)
+  }
+  
+  Object.defineProperty(Vue.prototype, '$askForConfirmation', {
+    value: $askForConfirmation
+  })
+}
+
 // add notifications functions (using vue-notifyjs)
-function installNotice (Vue) {
+function installNotifications (Vue) {
   const notifications = {
     successfully (text = 'Successfully completed') {
       this.$notify({

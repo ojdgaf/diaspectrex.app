@@ -79,7 +79,7 @@
     },
     methods: {
       deleteUser (user) {
-        if (this.$areYouSure('You are trying to delete user'))
+        if (this.$askForConfirmation('You are trying to delete user'))
           this.performDeleteRequest(user)
       },
       setUsers () {

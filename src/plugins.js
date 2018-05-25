@@ -11,6 +11,10 @@ import GlobalDirectives from './globalDirectives'
 import Globals from '@/globals'
 // Sidebar on the right. Used as a local plugin in DashboardLayout.vue
 import SideBar from './components/UIComponents/SidebarPlugin'
+// A lightweight HTML editor
+import wysiwyg from 'vue-wysiwyg'
+// Wrapper for SweetAlert2
+import VueSweetalert2 from 'vue-sweetalert2'
 
 // asset imports
 import 'bootstrap/dist/css/bootstrap.css'
@@ -33,5 +37,7 @@ export default {
     Vue.use(VTooltip)
     Vue.use(VueLodash)
     Vue.use(Globals)
+    Vue.use(wysiwyg)
+    Vue.use(VueSweetalert2)
   }
 }
