@@ -136,10 +136,10 @@ const routes = [
         props: true
       },
       {
-        path: 'hospitals/:hospital/edit',
+        path: 'hospitals/:id/edit',
         name: 'hospitals.edit',
         component: HospitalsEdit,
-        prods: true
+        props: true
       }
     ]
   },

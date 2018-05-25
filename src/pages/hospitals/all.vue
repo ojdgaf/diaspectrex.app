@@ -30,7 +30,7 @@
                                     <tr v-for="hospital in hospitals">
                                         <td>{{ hospital.id }}</td>
                                         <td>{{ hospital.name }}</td>
-                                        <td>{{ hospital.desciption }}</td>
+                                        <td>{{ hospital.description }}</td>
                                         <td>
                                             <span v-if="hospital.address">{{ hospital.address.full }}</span>
                                             <span v-else>Unknown</span>
@@ -38,7 +38,7 @@
                                         <td class="text-center">
                                             <div class="text-left">
                                                 <button class="btn btn-info">
-                                                    <router-link :to="{name: 'hospitals.edit', params: { hospital: hospital.id} }">
+                                                    <router-link :to="{name: 'hospitals.edit', params: { id: hospital.id} }">
                                                         <i class="fa fa-pencil"></i>
                                                     </router-link>
                                                 </button>

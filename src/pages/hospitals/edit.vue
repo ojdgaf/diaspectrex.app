@@ -8,13 +8,31 @@
                             <breadcrumbs :links="[
                                 { name: 'hospitals.index', title: 'Hospitals' },
                                 { name: 'hospitals.edit', title: 'Edit hospital' }
-                            ]"/>
-                            <h4 class="card-title">Edit hospital</h4>
+                            ]"></breadcrumbs>
+                            <title-block
+                                    title="Create hospital"
+                            ></title-block>
                         </template>
                         <div class="col-12">
-                            <form action="">
-
-                            </form>
+                            <div class="col-8">
+                                <div class="form-group">
+                                    <label>Name:</label>
+                                    <input type="text" v-model="hospital.name" class="form-control" placeholder="Name...">
+                                </div>
+                                <div class="form-group">
+                                    <label>Description:</label>
+                                    <wysiwyg v-model="hospital.description"></wysiwyg>
+                                </div>
+                                <address-component
+                                        :address-id="hospital.address_id"
+                                        :has-flat="false"
+                                        ref="addressComponent"
+                                ></address-component>
+                                <div class="text-right">
+                                    <button class="btn btn-success btn-fill"
+                                            @click="updateHospital">Edit</button>
+                                </div>
+                            </div>
                         </div>
                     </card>
                 </div>
@@ -24,17 +42,42 @@
 </template>
 
 <script>
-    import Card from 'src/components/UIComponents/Cards/Card'
-    import axios from 'axios'
-    import Breadcrumbs from 'src/components/UIComponents/Breadcrumbs'
+    import wysiwyg from 'vue-wysiwyg'
 
     export default {
-        components: {
-            Card, Breadcrumbs
-        },
+        props: [ 'id' ],
         data () {
             return {
+                hospital: {
+                    name: '',
+                    description: '',
+                    address_id: 0
+                }
+            }
+        },
+        created () {
+            this.getHospital().then(hospital => {
+                this.hospital.name = hospital.name;
+                this.hospital.description = hospital.description;
+                this.hospital.address_id = hospital.address ? hospital.address.id : 0;
+            });
+        },
+        methods: {
+            async getHospital () {
+                const response = await this.axios.get(`/hospitals/${this.id}`);
+                return response.data;
+            },
+            async updateHospital () {
+                if (this.hospital.address_id)
+                    this.hospital.address_id = await this.$refs.addressComponent.getAddressId();
+                else
+                    this.hospital.address_id = await this.$refs.addressComponent.getAddressId();
 
+                const response = await this.axios.put(`/hospitals/${this.id}`, this.hospital);
+                if (response.data.success)
+                    this.$successfully('Hospital was successfully edited!');
+                else
+                    this.$unfortunately('Error occurs when trying to edit hospital!');
             }
         }
     }

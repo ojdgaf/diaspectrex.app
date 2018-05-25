@@ -24,7 +24,6 @@
                                     <wysiwyg v-model="hospital.description"></wysiwyg>
                                 </div>
                                 <address-component
-                                    :has-flat="false"
                                     ref="addressComponent"
                                 ></address-component>
                                 <div class="text-right">
@@ -45,7 +44,6 @@
 
     export default {
         data () {
-
             return {
                 hospital: {
                     name: '',
