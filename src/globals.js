@@ -16,8 +16,8 @@ function installAlerts (Vue) {
       showCancelButton: true,
       confirmButtonText: 'Yes, do it',
       cancelButtonText: 'No, cancel!',
-      confirmButtonClass: 'btn btn-success',
-      cancelButtonClass: 'btn btn-danger',
+      confirmButtonClass: 'btn btn-success ml-1',
+      cancelButtonClass: 'btn btn-danger ml-1',
       buttonsStyling: false
     }
   }
