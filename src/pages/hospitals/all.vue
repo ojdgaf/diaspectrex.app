@@ -59,8 +59,6 @@
 </template>
 
 <script>
-    import swal from 'vue-sweetalert2'
-
     export default {
         data () {
             return {

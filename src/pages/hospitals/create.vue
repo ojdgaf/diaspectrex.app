@@ -40,8 +40,6 @@
 </template>
 
 <script>
-    import wysiwyg from 'vue-wysiwyg'
-
     export default {
         data () {
             return {
