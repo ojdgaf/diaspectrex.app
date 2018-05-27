@@ -12,9 +12,9 @@
 
           <fg-input v-model="payload.last_name" placeholder="Last name"></fg-input>
 
-          <p-radio v-model="payload.sex" value="Male" label="Male">Male</p-radio>
+          <c-radio v-model="payload.sex" value="Male" label="Male">Male</c-radio>
 
-          <p-radio v-model="payload.sex" value="Female" label="Female">Female</p-radio>
+          <c-radio v-model="payload.sex" value="Female" label="Female">Female</c-radio>
 
           <fg-input v-model="payload.birthday" placeholder="Birthday (YYYY-MM-DD)"></fg-input>
 

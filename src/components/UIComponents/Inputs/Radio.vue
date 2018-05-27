@@ -1,11 +1,12 @@
 <template>
-  <div class="form-check-radio">
+  <div class="form-check-radio" :class="inlineClass">
     <label :for="cbId" class="form-check-label">
       <input :id="cbId"
              type="radio"
+             class="form-control"
              :disabled="disabled"
              :value="label"
-             v-model="model" />
+             v-model="model"/>
       <span class="form-check-sign">
         <slot></slot>
       </span>
@@ -14,7 +15,7 @@
 </template>
 <script>
   export default {
-    name: 'p-radio',
+    name: 'CRadio',
     props: {
       label: [String, Number],
       disabled: [Boolean, String],
@@ -36,10 +37,7 @@
         }
       },
       inlineClass () {
-        if (this.inline) {
-          return `radio-inline`
-        }
-        return ''
+        return this.inline ? `form-check-inline` : ''
       }
     },
     created () {
