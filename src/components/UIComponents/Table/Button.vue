@@ -4,7 +4,7 @@
       <span v-html="button.display"></span>
     </button>
     <button v-if="isRoute" class="btn btn-icon ml-1" :class="buttonClass">
-      <router-link :to="getRoute()">
+      <router-link :to="routeObject">
         <span v-html="button.display"></span>
       </router-link>
     </button>
@@ -31,15 +31,7 @@
       isRoute: function () {
         return this.button.hasOwnProperty('route')
       },
-      buttonClass: function () {
-        return this.button.class ? this.button.class : 'btn-info'
-      }
-    },
-    methods: {
-      executeMethod () {
-        return this.button.method(this.item)
-      },
-      getRoute () {
+      routeObject: function () {
         let params = {}
 
         for (let param in this.button.route.params) {
@@ -50,6 +42,14 @@
           name: this.button.route.name,
           params
         }
+      },
+      buttonClass: function () {
+        return this.button.class ? this.button.class : 'btn-info'
+      }
+    },
+    methods: {
+      executeMethod () {
+        return this.button.method(this.item)
       }
     }
   }
