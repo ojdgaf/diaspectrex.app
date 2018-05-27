@@ -19,19 +19,21 @@
     "chartist": "^0.11.0",
     "es6-promise": "^4.1.1",
     "google-maps": "^3.2.1",
+    "luxon": "^1.2.1",
     "sweetalert": "^2.1.0",
     "v-tooltip": "^2.0.0-rc.1",
     "vue": "^2.5.2",
     "vue-axios": "^2.1.1",
     "vue-clickaway": "^2.1.0",
-    "vue-datetime-picker": "^0.2.1",
+    "vue-datetime": "^1.0.0-beta.3",
     "vue-lodash": "^2.0.0",
     "vue-multiselect": "^2.1.0",
     "vue-notifyjs": "^0.2.0",
     "vue-router": "^3.0.1",
     "vue-sweetalert2": "^1.2.4",
     "vue-wysiwyg": "^1.7.0",
-    "vue2-google-maps": "^0.8.4"
+    "vue2-google-maps": "^0.8.4",
+    "weekstart": "^1.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

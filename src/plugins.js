@@ -15,12 +15,15 @@ import SideBar from './components/UIComponents/SidebarPlugin'
 import wysiwyg from 'vue-wysiwyg'
 // Wrapper for SweetAlert2
 import VueSweetalert2 from 'vue-sweetalert2'
+// Mobile friendly datetime picker for Vue
+import Datetime from 'vue-datetime'
 
 // asset imports
 import 'bootstrap/dist/css/bootstrap.css'
 import 'vue-notifyjs/themes/default.scss'
 import './assets/sass/light-bootstrap-dashboard.scss'
 import './assets/css/demo.css'
+import 'vue-datetime/dist/vue-datetime.css'
 
 // library auto imports
 import 'es6-promise/auto'
@@ -39,5 +42,6 @@ export default {
     Vue.use(Globals)
     Vue.use(wysiwyg)
     Vue.use(VueSweetalert2)
+    Vue.use(Datetime)
   }
 }
