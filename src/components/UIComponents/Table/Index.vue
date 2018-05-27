@@ -3,37 +3,47 @@
     <thead>
     <slot name="columns">
       <th v-if="buttonsFirst && buttons.length">Operations</th>
-      <th v-for="column in columns">{{displayPropertyName(column)}}</th>
+
+      <template v-for="column in columns">
+        <table-header :column="column"></table-header>
+      </template>
+
       <th v-if="! buttonsFirst && buttons.length">Operations</th>
     </slot>
     </thead>
     <tbody>
     <tr v-for="item in data">
       <slot :row="item">
-        <template v-if="! buttonsFirst">
-          <td v-for="column in columns" v-if="hasProperty(item, column)">{{itemProperty(item, column)}}</td>
-        </template>
-
-        <td v-if="buttons.length">
+        <td v-if="buttonsFirst && buttons.length">
           <template v-for="button in buttons">
-            <table-button :button="button" :data="item"></table-button>
+            <table-button :item="item" :button="button"></table-button>
           </template>
         </td>
 
-        <template v-if="buttonsFirst">
-          <td v-for="column in columns" v-if="hasProperty(item, column)">{{itemProperty(item, column)}}</td>
+        <template v-for="column in columns">
+          <table-data :item="item" :column="column"></table-data>
         </template>
+
+        <td v-if="! buttonsFirst && buttons.length">
+          <template v-for="button in buttons">
+            <table-button :item="item" :button="button"></table-button>
+          </template>
+        </td>
       </slot>
     </tr>
     </tbody>
   </table>
 </template>
 <script>
+  import TableHeader from './Header'
+  import TableData from './Data'
   import TableButton from './Button'
 
   export default {
     name: 'l-table',
     components: {
+      TableHeader,
+      TableData,
       TableButton
     },
     props: {
@@ -47,26 +57,6 @@
         type: Boolean,
         default: false
       }
-    },
-    methods: {
-      hasProperty (item, column) {
-        return item[this.propertyActualName(column)] !== 'undefined'
-      },
-      itemProperty (item, column) {
-        return item[this.propertyActualName(column)]
-      },
-      propertyActualName(column) {
-        if (typeof column === 'string')
-          return this.transformToActualName(column)
-
-        return column.actual ? column.actual : this.transformToActualName(column.display)
-      },
-      displayPropertyName(column) {
-        return typeof column === 'string' ? column : column.display
-      },
-      transformToActualName(propertyDisplayName) {
-        return propertyDisplayName.replace(/\s+/g, '_').toLowerCase()
-      },
     }
   }
 </script>

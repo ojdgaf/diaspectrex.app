@@ -19,7 +19,7 @@
         type: Object,
         required: true
       },
-      data: {
+      item: {
         type: Object,
         required: true
       }
@@ -37,13 +37,13 @@
     },
     methods: {
       executeMethod () {
-        return this.button.method(this.data)
+        return this.button.method(this.item)
       },
       getRoute () {
         let params = {}
 
         for (let param in this.button.route.params) {
-          params[param] = this.data[this.button.route.params[param]]
+          params[param] = this.item[this.button.route.params[param]]
         }
 
         return {
