@@ -5,7 +5,7 @@
       <th v-if="buttonsFirst && buttons.length">Operations</th>
 
       <template v-for="column in columns">
-        <table-header :column="column"></table-header>
+        <c-th :column="column"></c-th>
       </template>
 
       <th v-if="! buttonsFirst && buttons.length">Operations</th>
@@ -16,17 +16,17 @@
       <slot :row="item">
         <td v-if="buttonsFirst && buttons.length">
           <template v-for="button in buttons">
-            <table-button :item="item" :button="button"></table-button>
+            <c-tb :item="item" :button="button"></c-tb>
           </template>
         </td>
 
         <template v-for="column in columns">
-          <table-data :item="item" :column="column"></table-data>
+          <c-td :item="item" :column="column"></c-td>
         </template>
 
         <td v-if="! buttonsFirst && buttons.length">
           <template v-for="button in buttons">
-            <table-button :item="item" :button="button"></table-button>
+            <c-tb :item="item" :button="button"></c-tb>
           </template>
         </td>
       </slot>
@@ -35,16 +35,16 @@
   </table>
 </template>
 <script>
-  import TableHeader from './Header'
-  import TableData from './Data'
-  import TableButton from './Button'
+  import CTh from './Header'
+  import CTd from './Data'
+  import CTb from './Button'
 
   export default {
-    name: 'l-table',
+    name: 'CTable',
     components: {
-      TableHeader,
-      TableData,
-      TableButton
+      CTh,
+      CTd,
+      CTb
     },
     props: {
       columns: Array,

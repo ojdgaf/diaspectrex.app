@@ -13,7 +13,7 @@
 
 <script>
   export default {
-    name: 'TableButton',
+    name: 'CTb',
     props: {
       button: {
         type: Object,

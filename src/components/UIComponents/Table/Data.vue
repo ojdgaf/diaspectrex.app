@@ -4,7 +4,7 @@
 
 <script>
   export default {
-    name: 'TableData',
+    name: 'CTd',
     props: {
       column: {
         type: [String, Object],

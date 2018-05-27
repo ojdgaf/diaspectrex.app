@@ -12,9 +12,9 @@
               <title-block title="Users management" :add-link="{ name: 'users.create' }"></title-block>
             </template>
             <div class="table-responsive">
-              <l-table class="table table-hover table-striped"
+              <c-table class="table table-hover table-striped"
                        :columns="tableColumns" :data="tableData" :buttons="tableButtons">
-              </l-table>
+              </c-table>
             </div>
           </card>
         </div>
@@ -24,12 +24,12 @@
 </template>
 
 <script>
-  import LTable from 'src/components/UIComponents/Table/Index'
+  import CTable from 'src/components/UIComponents/Table/Index'
 
   export default {
     name: 'ManagementUsersIndexPage',
     components: {
-      LTable
+      CTable
     },
     data () {
       return {

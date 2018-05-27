@@ -4,7 +4,7 @@
 
 <script>
   export default {
-    name: 'TableHeader',
+    name: 'CTh',
     props: {
       column: {
         type: [String, Object],
