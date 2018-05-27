@@ -3,6 +3,9 @@
 </template>
 
 <script>
+
+  // TODO add hoverable component that shrinks table and appears for huge amount of cell data
+
   export default {
     name: 'CTd',
     props: {
