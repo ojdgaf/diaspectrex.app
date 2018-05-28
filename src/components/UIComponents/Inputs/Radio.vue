@@ -17,7 +17,7 @@
   export default {
     name: 'CRadio',
     props: {
-      label: [String, Number],
+      label: [String, Number, Boolean],
       disabled: [Boolean, String],
       value: [String, Boolean],
       inline: Boolean
