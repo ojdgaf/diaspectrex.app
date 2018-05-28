@@ -114,10 +114,9 @@ const routes = [
         path: 'management/users/create',
         name: 'users.create',
         component: UsersCreate,
-        props: true
       },
       {
-        path: 'management/users/:id/edit',
+        path: 'management/users/:id(\\d+)/edit',
         name: 'users.edit',
         component: UsersEdit,
         props: true
@@ -136,7 +135,7 @@ const routes = [
         props: true
       },
       {
-        path: 'hospitals/:id/edit',
+        path: 'hospitals/:id(\\d+)/edit',
         name: 'hospitals.edit',
         component: HospitalsEdit,
         props: true
