@@ -5,64 +5,54 @@
         <div class="col-12">
           <card>
             <template slot="header">
-              <h4 class="card-title">Edit {{ user.name }}</h4>
-              <p class="card-category"></p>
+              <breadcrumbs :links="[
+                {name: 'management', title: 'Management'},
+                {name: 'users.index', title: 'Users'},
+                {name: '', title: 'Edit'}]">
+              </breadcrumbs>
             </template>
-            <div class="row">
-              <fg-input v-model="user.email" class="col-md-4 col-sm-6 offset-md-2" label="Email" placeholder="Email">
-              </fg-input>
-              <fg-input v-model="user.last_name" class="col-md-4 col-sm-6 offset" label="Last name" placeholder="Last name">
-              </fg-input>
-            </div>
-            <div class="row">
-              <fg-input v-model="user.middle_name" class="col-md-4 col-sm-6 offset-md-2" label="Middle name" placeholder="Middle name">
-              </fg-input>
-              <fg-input v-model="user.first_name" class="col-md-4 col-sm-6 offset" label="First name" placeholder="First name">
-              </fg-input>
-            </div>
-            <div class="row">
-              <fg-input v-model="user.sex" class="col-md-4 col-sm-6 offset-md-2" label="Sex" placeholder="Sex">
-              </fg-input>
-              <fg-input v-model="user.birthday" class="col-md-4 col-sm-6 offset" label="Birthday" placeholder="Birthday">
-              </fg-input>
-            </div>
+            <input-group v-if="userIsReady" :initialUser="user"></input-group>
           </card>
         </div>
-
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import Card from '@/components/UIComponents/Cards/Card.vue'
+  import InputGroup from './components/InputGroup.vue'
 
   export default {
-    name: "ManagementUsersEditPage",
+    name: "EditUser",
     components: {
-      Card
+      InputGroup
     },
     props: {
       id: {
-        type: Number,
-        required: true
+        type: [String, Number],
+        required: true,
+        validator: (value) => /^\d+$/.test(value)
       }
     },
-    data() {
+    data () {
       return {
-        user: ''
+        user: null
       }
     },
     created: function () {
       this.setUser()
     },
+    computed: {
+      userIsReady: function () {
+        return this.user !== null
+      }
+    },
     methods: {
-      setUser() {
-        this.loadUser().then(user => this.user = this.$user(user))
+      setUser () {
+        return this.axios.get(`users/${this.id}`).then(res => this.user = res.data)
       },
-      loadUser() {
-        return this.axios.get('users/' + this.id).then(response => response.data)
-      },
+      saveUser() {
+      }
     }
   }
 </script>

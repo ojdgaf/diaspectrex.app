@@ -7,15 +7,14 @@
             <template slot="header">
               <breadcrumbs :links="[
                 { name: 'management', title: 'Management' },
-                { name: 'users.index', title: 'Users' }]">
+                { name: '', title: 'Users' }]">
               </breadcrumbs>
-              <title-block title="Users management" :add-link="{ name: 'users.create' }"></title-block>
+              <title-block title="Users management" :add-link="{ name: 'users.create' }">
+              </title-block>
             </template>
-            <div class="table-responsive">
-              <c-table class="table table-hover table-striped"
-                       :columns="tableColumns" :data="tableData" :buttons="tableButtons">
-              </c-table>
-            </div>
+            <c-table class="table table-hover table-striped table-responsive"
+                     :columns="tableColumns" :data="tableData" :buttons="tableButtons">
+            </c-table>
           </card>
         </div>
       </div>
@@ -27,7 +26,7 @@
   import CTable from 'src/components/UIComponents/Table/Index'
 
   export default {
-    name: 'ManagementUsersIndexPage',
+    name: 'Users',
     components: {
       CTable
     },
