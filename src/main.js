@@ -1,10 +1,9 @@
 import Vue from 'vue';
-import router from '@/router';
-import App from '@/App.vue';
-import plugins from '@/plugins';
+import router from 'src/router';
+import App from 'src/App.vue';
+import Setup from 'src/compositions';
 
-// plugin setup
-Vue.use(plugins);
+Vue.use(Setup);
 
 Vue.config.productionTip = false
 
