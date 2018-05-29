@@ -6,6 +6,7 @@ import Notifications from 'vue-notifyjs'
 import wysiwyg from 'vue-wysiwyg'
 import VueSweetalert2 from 'vue-sweetalert2'
 import Datetime from 'vue-datetime'
+import VeeValidate from 'vee-validate'
 
 // asset imports
 import 'bootstrap/dist/css/bootstrap.css'
@@ -29,5 +30,6 @@ export default {
     Vue.use(wysiwyg)
     Vue.use(VueSweetalert2)
     Vue.use(Datetime)
+    Vue.use(VeeValidate)
   }
 }

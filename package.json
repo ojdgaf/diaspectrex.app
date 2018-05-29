@@ -22,6 +22,7 @@
     "luxon": "^1.2.1",
     "sweetalert": "^2.1.0",
     "v-tooltip": "^2.0.0-rc.1",
+    "vee-validate": "^2.0.9",
     "vue": "^2.5.2",
     "vue-axios": "^2.1.1",
     "vue-clickaway": "^2.1.0",
