@@ -7,6 +7,7 @@ import wysiwyg from 'vue-wysiwyg'
 import VueSweetalert2 from 'vue-sweetalert2'
 import Datetime from 'vue-datetime'
 import VeeValidate from 'vee-validate'
+import Moment from 'vue-moment'
 
 // asset imports
 import 'bootstrap/dist/css/bootstrap.css'
@@ -31,5 +32,6 @@ export default {
     Vue.use(VueSweetalert2)
     Vue.use(Datetime)
     Vue.use(VeeValidate)
+    Vue.use(Moment)
   }
 }
