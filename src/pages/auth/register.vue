@@ -4,25 +4,46 @@
       <img class="card-img-top" src="static/img/diaspectrex.jpg" alt="logo">
       <div class="card-body">
         <form v-on:submit.prevent="register()">
-          <fg-input v-model="payload.email" placeholder="Email"></fg-input>
+          <fg-input v-model="user.email" v-validate="'required|email'"
+                    type="email" name="email" placeholder="Email">
+          </fg-input>
 
-          <fg-input v-model="payload.first_name" placeholder="First name"></fg-input>
+          <fg-input v-model="user.first_name" v-validate="'required|alpha'"
+                    name="first_name" placeholder="First name">
+          </fg-input>
 
-          <fg-input v-model="payload.middle_name" placeholder="Middle name"></fg-input>
+          <fg-input v-model="user.middle_name" v-validate="'alpha'"
+                    name="middle_name" placeholder="Middle name">
+          </fg-input>
 
-          <fg-input v-model="payload.last_name" placeholder="Last name"></fg-input>
+          <fg-input v-model="user.last_name" v-validate="'required|alpha'"
+                    name="last_name" placeholder="Last name">
+          </fg-input>
 
-          <c-radio v-model="payload.sex" value="Male" label="Male">Male</c-radio>
+          <div class="text-center">
+            <c-radio v-model="user.sex" label="male" inline>Male</c-radio>
+            <c-radio v-model="user.sex" label="female" inline>Female</c-radio>
+          </div>
 
-          <c-radio v-model="payload.sex" value="Female" label="Female">Female</c-radio>
+          <div class="form-group">
+            <datetime v-model="user.birthday" v-validate="'required'"
+                      name="birthday" input-class="form-control" placeholder="Birthday">
+            </datetime>
+          </div>
 
-          <fg-input v-model="payload.birthday" placeholder="Birthday (YYYY-MM-DD)"></fg-input>
+          <fg-input v-model="user.password" :type="passwordFieldType"
+                    v-validate="'required|confirmed:password_confirmation'"
+                    name="password" placeholder="Password">
+          </fg-input>
 
-          <fg-input v-model="payload.password" :type="passwordFieldType" placeholder="Password"></fg-input>
+          <fg-input v-model="user.password_confirmation" :type="passwordFieldType"
+                    v-validate="'required'"
+                    name="password_confirmation" placeholder="Confirm password">
+          </fg-input>
 
-          <fg-input v-model="payload.password_confirmation" :type="passwordFieldType" placeholder="Confirm password"></fg-input>
-
-          <button type="button" @click="switchVisibility">show / hide</button>
+          <button @click="switchVisibility" type="button" class="btn btn-dark btn-sm">
+            {{passwordButtonText}}
+          </button>
 
           <p class="text-right">
             <router-link :to="{ name: 'Login' }" class="small ml-auto my-auto">
@@ -43,19 +64,18 @@
 
 <script>
   export default {
-    data() {
+    data () {
       return {
         passwordFieldType: 'password',
-        payload: {
-          email: '',
-          first_name: '',
-          middle_name: '',
-          last_name: '',
-          password: '',
-          password_confirmation: '',
-          sex: 'Male',
-          birthday: ''
-        },
+        user: {}
+      }
+    },
+    created: function () {
+      this.$user().then(user => this.user = user)
+    },
+    computed: {
+      passwordButtonText: function () {
+        return this.passwordFieldType === 'password' ? 'show' : 'hide'
       }
     },
     methods: {
@@ -63,15 +83,27 @@
         this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password'
       },
       register () {
+        this.$validator.validateAll()
+          .then(result => result ? this.performRegisterRequest() : this.$unfortunately('Please check input'))
+      },
+      performRegisterRequest () {
         this.$auth.register({
-          data: this.payload,
+          data: this.preparedUser(),
           autoLogin: true,
           rememberMe: true,
           redirect: {
             name: 'Index'
           },
-          error: function () {}
+          error: function () {
+          }
         })
+      },
+      preparedUser () {
+        let user = this._.cloneDeep(this.user)
+
+        user.birthday = timestamp(user.birthday)
+
+        return user
       }
     }
   }
