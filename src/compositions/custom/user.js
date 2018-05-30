@@ -1,3 +1,5 @@
+import Role from './role'
+
 export default {
   install (Vue) {
     async function $user (underlying) {
@@ -26,7 +28,8 @@ class UserWrapper {
     if (this.isEmpty())
       this.setEmptyProperties()
     
-    this.user.can = checkPermission
+    this.user.can    = Role.can
+    this.user.canAll = Role.canAll
     
     await this.setACL()
     
@@ -102,18 +105,5 @@ class UserWrapper {
   
   setPermissionNames () {
     this.user.permission_names = this.user.permissions.map(permission => permission.name)
-  }
-}
-
-function checkPermission (permissionName) {
-  const permissions = [].concat(...this.roles.map(role => role.permissions))
-  
-  switch (typeof permissions[0]) {
-    case 'string':
-      return permissions.includes(permissionName)
-    case 'object':
-      return permissions.some(permission => permission.name === permissionName)
-    default:
-      return false
   }
 }
