@@ -11,7 +11,7 @@
                 {name: '', title: 'Edit'}]">
               </breadcrumbs>
             </template>
-            <input-group v-if="userIsReady" :initialUser="user"></input-group>
+            <input-group v-if="userIsReady" :initialUser="user" :action="saveUser"></input-group>
           </card>
         </div>
       </div>
@@ -51,7 +51,8 @@
       setUser () {
         return this.axios.get(`users/${this.id}`).then(res => this.user = res.data)
       },
-      saveUser() {
+      saveUser (user) {
+        this.axios.put(`users/${user.id}`, user).then(res => this.$router.push({name: 'users.index'}))
       }
     }
   }

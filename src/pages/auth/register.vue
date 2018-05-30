@@ -101,7 +101,7 @@
       preparedUser () {
         let user = this._.cloneDeep(this.user)
 
-        user.birthday = timestamp(user.birthday)
+        user.birthday = unix(user.birthday)
 
         return user
       }

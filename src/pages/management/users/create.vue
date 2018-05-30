@@ -11,7 +11,7 @@
                 {name: '', title: 'Create'}]">
               </breadcrumbs>
             </template>
-            <input-group></input-group>
+            <input-group :action="saveUser"></input-group>
           </card>
         </div>
       </div>
@@ -27,15 +27,9 @@
     components: {
       InputGroup
     },
-    data () {
-      return {}
-    },
-    created: function () {
-    },
-    computed: {},
     methods: {
-      saveUser () {
-
+      saveUser (user) {
+        this.axios.post(`users`, user).then(res => this.$router.push({name: 'users.index'}))
       }
     }
   }

@@ -24,7 +24,7 @@
       <fg-input v-model="user.email" class="col-md-4 col-sm-12 offset-md-2"
                 label="Email" placeholder="Email">
       </fg-input>
-      <fg-input v-model="user.password" class="col-md-4 col-sm-12"
+      <fg-input v-model="user.password" v-show="! userExists" class="col-md-4 col-sm-12"
                 label="Password" placeholder="Password">
       </fg-input>
     </div>
@@ -41,7 +41,7 @@
         <datetime v-model="user.birthday" input-class="form-control"></datetime>
       </div>
     </div>
-    <div v-if="user.can('have employee attributes')">
+    <div v-if="user.can('be support|be employee|be doctor|be head')">
       <hr>
       <div class="row">
         <div class="form-group col-md-4 col-sm-12 offset-md-2">
@@ -68,7 +68,7 @@
         </div>
       </div>
     </div>
-    <div v-if="user.can('have doctor attributes')">
+    <div v-if="user.can('be doctor|be head')">
       <hr>
       <div class="row">
         <fg-input v-model="user.degree" class="col-md-4 col-sm-12 offset-md-2"
@@ -76,7 +76,7 @@
         </fg-input>
       </div>
     </div>
-    <div v-if="user.can('have employee attributes')">
+    <div v-if="user.can('be support|be employee|be doctor|be head')">
       <hr>
       <div class="row">
         <div class="form-group col-md-8 col-sm-12 offset-md-2">
@@ -84,12 +84,17 @@
           <wysiwyg v-model="user.about"></wysiwyg>
         </div>
       </div>
-    </div>
-    <div v-if="user.can('have employee attributes')">
       <hr>
-      <div class="row">
-        <address-component :address-id="user.address_id" :has-flat="true" ref="addressComponent" class="col-md-8 col-sm-12 offset-md-2">
-        </address-component>
+    </div>
+    <div class="row">
+      <address-component :address-id="user.address_id" :has-flat="true" ref="addressComponent"
+                         class="col-md-8 col-sm-12 offset-md-2">
+      </address-component>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-8 col-sm-12 offset-md-2 text-right">
+        <button @click="validateBeforeAction" class="btn btn-success btn-fill">Save</button>
       </div>
     </div>
   </div>
@@ -99,7 +104,8 @@
   export default {
     name: 'InputGroup',
     props: {
-      initialUser: Object
+      initialUser: Object,
+      action: Function
     },
     data () {
       return {
@@ -117,6 +123,9 @@
       userIsReady: function () {
         return this.user !== null
       },
+      userExists: function () {
+        return ! ! this.user.id
+      },
       rolesAreReady: function () {
         return this.roles !== null
       },
@@ -126,13 +135,36 @@
     },
     methods: {
       wrapUser () {
-        return this.$user(this.initialUser).then(user => this.user = user)
+        return this.$user(this.initialUser).then(user => {
+          user.birthday = iso(user.birthday)
+          this.user = user
+        })
       },
       setRoles () {
         return this.axios.get('roles').then(res => this.roles = res.data)
       },
       setHospitals () {
         return this.axios.get('hospitals').then(res => this.hospitals = res.data)
+      },
+      validateBeforeAction () {
+        this.$validator.validateAll()
+          .then(result => result ? this.callAction() : this.$unfortunately('Please check input'))
+      },
+      callAction () {
+        this.preparedUser().then(user => this.action(user))
+      },
+      async preparedUser () {
+        let user = this._.cloneDeep(this.user)
+
+        user.address_id = await this.$refs.addressComponent.getAddressId()
+        user.birthday = unix(user.birthday)
+
+        if (user.can('be support|be employee|be doctor|be head'))
+          user.hospital_id = user.hospital.id
+
+        user.role_ids = user.roles.map(role => role.id)
+
+        return user
       }
     }
   }
