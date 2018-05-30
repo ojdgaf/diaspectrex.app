@@ -9,16 +9,17 @@ const customAxios = {
     
     Vue.axios.interceptors.response.use(
       (response) => {
-        // get response body directly
+        if (response.data.message)
+          (new Vue()).$successfully(response.data.message)
+        
         return response.data;
       },
       (error) => {
-          // inform user via notification
-        ;(new Vue()).$unfortunately(
+        (new Vue()).$unfortunately(
           // hide a message of unexpected error from user
           error.response.status === 500 ? 'Sorry, something went wrong' : error.response.data.message
         )
-
+        
         return Promise.reject(error);
       }
     )
