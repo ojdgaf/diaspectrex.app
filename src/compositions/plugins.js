@@ -8,6 +8,7 @@ import VueSweetalert2 from 'vue-sweetalert2'
 import Datetime from 'vue-datetime'
 import VeeValidate from 'vee-validate'
 import Moment from 'vue-moment'
+import BootstrapVue from 'bootstrap-vue'
 
 // asset imports
 import 'bootstrap/dist/css/bootstrap.css'
@@ -33,5 +34,6 @@ export default {
     Vue.use(Datetime)
     Vue.use(VeeValidate)
     Vue.use(Moment)
+    Vue.use(BootstrapVue)
   }
 }

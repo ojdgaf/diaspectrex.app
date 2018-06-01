@@ -75,14 +75,15 @@
                 return response.data;
             },
             async deleteHospital(id) {
-                const response = await this.axios.delete(`/hospitals/${id}`);
+                this.$askForConfirmation('You are trying to delete hospital')
+                    .then(async (deletingApproved) => {
+                        if (deletingApproved) {
+                            const response = await this.axios.delete(`/hospitals/${id}`);
 
-                if (response.success){
-                    this.$successfully('Hospital was successfully deleted!');
-                    this.getHospitals().then(hospitals => this.hospitals = hospitals);
-                }
-                else
-                    this.$unfortunately('Error occurs when trying to delete hospital!');
+                            if (response.data.success)
+                                this.hospitals = response.data.hospitals;
+                        }
+                    });
             }
         }
     }

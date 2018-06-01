@@ -20,5 +20,3 @@
     name: 'card'
   }
 </script>
-<style>
-</style>

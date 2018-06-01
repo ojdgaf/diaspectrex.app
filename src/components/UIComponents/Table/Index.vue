@@ -25,9 +25,11 @@
         </template>
 
         <td v-if="! buttonsFirst && buttons.length">
-          <template v-for="button in buttons">
-            <c-tb :item="item" :button="button"></c-tb>
-          </template>
+          <div class="flexible-operations-wrapper">
+            <template v-for="button in buttons">
+              <c-tb :item="item" :button="button"></c-tb>
+            </template>
+          </div>
         </td>
       </slot>
     </tr>
@@ -60,5 +62,12 @@
     }
   }
 </script>
-<style>
+
+<style scoped>
+  .flexible-operations-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+  }
 </style>
