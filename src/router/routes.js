@@ -25,9 +25,14 @@ import Icons from 'src/components/Dashboard/Views/Icons.vue'
 import Notifications from 'src/components/Dashboard/Views/Notifications.vue'
 
 // Hospitals
-import HospitalsIndex from '@/pages/hospitals/all'
-import HospitalsCreate from '@/pages/hospitals/create'
-import HospitalsEdit from '@/pages/hospitals/edit'
+import HospitalsIndex from '@/pages/hospitals/all.vue'
+import HospitalsCreate from '@/pages/hospitals/create.vue'
+import HospitalsEdit from '@/pages/hospitals/edit.vue'
+
+// Patient cards
+import PatientCardsIndex from '@/pages/patient_cards/index.vue'
+import PatientCardsCreate from '@/pages/patient_cards/create.vue'
+import PatientCardsEdit from '@/pages/patient_cards/edit.vue'
 
 const routes = [
   {
@@ -139,6 +144,25 @@ const routes = [
         name: 'hospitals.edit',
         component: HospitalsEdit,
         props: true
+      },
+
+      //patient cards
+      {
+          path: 'patient-cards',
+          name: 'patient_cards.index',
+          component: PatientCardsIndex
+      },
+      {
+          path: 'patient-cards/create',
+          name: 'patient_cards.create',
+          component: PatientCardsCreate,
+          props: true
+      },
+      {
+          path: 'patient-cards/:id(\\d+)/edit',
+          name: 'patient_cards.edit',
+          component: PatientCardsEdit,
+          props: true
       }
     ]
   },

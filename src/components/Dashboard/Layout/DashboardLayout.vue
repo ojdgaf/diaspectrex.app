@@ -36,6 +36,27 @@
         <i class="fa fa-hospital-o"></i>
         <p>Hospitals</p>
       </sidebar-link>
+
+      <sidebar-link to="/admin/patient-cards">
+        <i class="fa fa-id-card"></i>
+        <p>Patient cards</p>
+      </sidebar-link>
+
+      <sidebar-link to="/admin/services">
+        <i class="fa fa-money"></i>
+        <p>Services</p>
+      </sidebar-link>
+
+      <sidebar-link to="/admin/classifiers">
+        <i class="fa fa-sitemap"></i>
+        <p>Classifiers</p>
+      </sidebar-link>
+
+      <sidebar-link to="/admin/diagnostic-groups">
+        <i class="fa fa-object-group"></i>
+        <p>Diagnostic groups</p>
+      </sidebar-link>
+
     </side-bar>
     <div class="main-panel">
       <top-navbar></top-navbar>
