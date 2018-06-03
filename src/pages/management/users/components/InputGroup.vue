@@ -137,6 +137,7 @@
       wrapUser () {
         return this.$user(this.initialUser).then(user => {
           user.birthday = iso(user.birthday)
+          user.hired_at = iso(user.hired_at)
           this.user = user
         })
       },
@@ -159,8 +160,10 @@
         user.address_id = await this.$refs.addressComponent.getAddressId()
         user.birthday = unix(user.birthday)
 
-        if (user.can('be support|be employee|be doctor|be head'))
+        if (user.can('be support|be employee|be doctor|be head')) {
           user.hospital_id = user.hospital.id
+          user.hired_at = unix(user.hired_at)
+        }
 
         user.role_ids = user.roles.map(role => role.id)
 
