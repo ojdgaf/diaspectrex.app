@@ -1,11 +1,11 @@
 <template>
-  <td v-html="value" class="text-center"></td>
+  <td class="text-center">
+    <span v-if="overlarge" @click="alertValue">...</span>
+    <span v-else v-html="value"></span>
+  </td>
 </template>
 
 <script>
-
-  // TODO add hoverable component that shrinks table and appears for huge amount of cell data
-
   export default {
     name: 'CTd',
     props: {
@@ -37,14 +37,22 @@
           return this.propertyValue();
 
         return this.empty
+      },
+      overlarge: function () {
+        return this.value && this.value.length > 100
       }
     },
     methods: {
+      alertValue () {
+        this.$swal({
+          html: this.value
+        })
+      },
       itemHasProperty () {
-        return this.item.hasOwnProperty(this.propertyActualName())
+        return this._.get(this.item, this.propertyActualName()) !== undefined
       },
       propertyValue () {
-        const value = this.item[this.propertyActualName()]
+        const value = this._.get(this.item, this.propertyActualName())
 
         switch (typeof value) {
           case 'boolean':

@@ -7,9 +7,9 @@
             <template slot="header">
               <breadcrumbs :links="[
                 { name: 'management', title: 'Management' },
-                { name: '', title: 'Users' }]">
+                { name: '', title: 'Roles' }]">
               </breadcrumbs>
-              <title-block title="Users management" :add-link="{ name: 'users.create' }">
+              <title-block title="Roles management" :add-link="{ name: 'roles.create' }">
               </title-block>
             </template>
             <c-table class="table table-hover table-striped table-responsive"
@@ -26,28 +26,27 @@
   import CTable from 'src/components/UIComponents/Table/Index'
 
   export default {
-    name: 'Users',
+    name: 'Roles',
     components: {
       CTable
     },
     data () {
       return {
         tableColumns: [
-          'Email', 'Name', 'Sex', 'Birthday',
-          {display: 'Address', actual: 'address.full'},
-          {display: 'Hospital', actual: 'hospital.name'},
-          'Passport', {display: 'Present', actual: 'is_present'}, 'About'
+          {display: 'Name', actual: 'name'},
+          {display: 'Title', actual: 'display_name'},
+          'Description'
         ],
         tableButtons: [
           {
             route: {
-              name: 'users.edit',
+              name: 'roles.edit',
               params: {id: 'id'}
             },
             display: `<i class="fa fa-edit"></i>`
           },
           {
-            method: this.deleteUser,
+            method: this.deleteRole,
             class: 'btn-danger',
             display: `<i class="fa fa-trash"></i>`
           }
@@ -56,21 +55,21 @@
       }
     },
     created: function () {
-      this.setUsers()
+      this.setRoles()
     },
     methods: {
-      setUsers () {
-        return this.loadUsers().then(users => this.tableData = users)
+      setRoles () {
+        return this.loadRoles().then(roles => this.tableData = roles)
       },
-      loadUsers () {
-        return this.axios.get(`users`).then(res => res.data)
+      loadRoles () {
+        return this.axios.get(`roles`).then(res => res.data)
       },
-      deleteUser (user) {
-        this.$askForConfirmation('You are trying to delete user')
-          .then(res => res ? this.performDeleteRequest(user) : {})
+      deleteRole (role) {
+        this.$askForConfirmation('You are trying to delete role')
+          .then(res => res ? this.performDeleteRequest(role) : {})
       },
-      performDeleteRequest (user) {
-        this.axios.delete(`users/${user.id}`).then(res => this.setUsers())
+      performDeleteRequest (role) {
+        this.axios.delete(`roles/${role.id}`).then(res => this.setRoles())
       }
     }
   }

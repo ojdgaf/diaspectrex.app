@@ -12,9 +12,14 @@ import PasswordReset from '@/pages/auth/password/reset'
 import ManagementMain from '@/pages/management/main.vue'
 
 // Management of users
-import UsersIndex from '@/pages/management/users/index.vue'
-import UsersCreate from '@/pages/management/users/create.vue'
-import UsersEdit from '@/pages/management/users/edit.vue'
+import UsersIndex from 'src/pages/management/users/index.vue'
+import UsersCreate from 'src/pages/management/users/create.vue'
+import UsersEdit from 'src/pages/management/users/edit.vue'
+
+// Management of roles
+import RolesIndex from 'src/pages/management/roles/index.vue'
+import RolesCreate from 'src/pages/management/roles/create.vue'
+import RolesEdit from 'src/pages/management/roles/edit.vue'
 
 // Admin pages
 import Overview from 'src/components/Dashboard/Views/Overview.vue'
@@ -104,12 +109,14 @@ const routes = [
         component: Notifications
       },
       
-      // users
+      // management
       {
         path: 'management',
         name: 'management',
         component: ManagementMain
       },
+      
+      // users
       {
         path: 'management/users',
         name: 'users.index',
@@ -124,6 +131,24 @@ const routes = [
         path: 'management/users/:id(\\d+)/edit',
         name: 'users.edit',
         component: UsersEdit,
+        props: true
+      },
+      
+      // roles
+      {
+        path: 'management/roles',
+        name: 'roles.index',
+        component: RolesIndex
+      },
+      {
+        path: 'management/roles/create',
+        name: 'roles.create',
+        component: RolesCreate,
+      },
+      {
+        path: 'management/roles/:id(\\d+)/edit',
+        name: 'roles.edit',
+        component: RolesEdit,
         props: true
       },
       

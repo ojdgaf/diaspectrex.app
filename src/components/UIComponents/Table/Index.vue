@@ -1,41 +1,46 @@
 <template>
-  <table class="table">
-    <thead>
-    <slot name="columns">
-      <th v-if="buttonsFirst && buttons.length">Operations</th>
-
-      <template v-for="column in columns">
-        <c-th :column="column"></c-th>
-      </template>
-
-      <th v-if="! buttonsFirst && buttons.length">Operations</th>
-    </slot>
-    </thead>
-    <tbody>
-    <tr v-for="item in data">
-      <slot :row="item">
-        <td v-if="buttonsFirst && buttons.length">
-          <template v-for="button in buttons">
-            <c-tb :item="item" :button="button"></c-tb>
-          </template>
-        </td>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+      <slot name="columns">
+        <th v-if="buttonsFirst && buttons.length">Operations</th>
 
         <template v-for="column in columns">
-          <c-td :item="item" :column="column"></c-td>
+          <c-th :column="column"></c-th>
         </template>
 
-        <td v-if="! buttonsFirst && buttons.length">
-          <div class="flexible-operations-wrapper">
-            <template v-for="button in buttons">
-              <c-tb :item="item" :button="button"></c-tb>
-            </template>
-          </div>
-        </td>
+        <th v-if="! buttonsFirst && buttons.length">Operations</th>
       </slot>
-    </tr>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+      <tr v-for="item in data">
+        <slot :row="item">
+          <td v-if="buttonsFirst && buttons.length">
+            <div class="flexible-operations-wrapper">
+              <template v-for="button in buttons">
+                <c-tb :item="item" :button="button"></c-tb>
+              </template>
+            </div>
+          </td>
+
+          <template v-for="column in columns">
+            <c-td :item="item" :column="column"></c-td>
+          </template>
+
+          <td v-if="! buttonsFirst && buttons.length">
+            <div class="flexible-operations-wrapper">
+              <template v-for="button in buttons">
+                <c-tb :item="item" :button="button"></c-tb>
+              </template>
+            </div>
+          </td>
+        </slot>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
+
 <script>
   import CTh from './Header'
   import CTd from './Data'
