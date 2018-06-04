@@ -1,41 +1,102 @@
 <template>
   <div class="form-group">
-    <label v-if="label" class="control-label">{{label}}</label>
-    <b-form-input v-bind="$attrs" @input="emit"
-                  :value="value" :state="state" :name="name" :placeholder="ph"
-                  class="form-control">
-    </b-form-input>
-    <b-form-invalid-feedback>{{errors.first(name)}}</b-form-invalid-feedback>
+    <label v-if="ll" class="control-label">{{ll}}</label>
+    <component v-bind="$attrs" @input="emit" @html="emit"
+               :is="component" :value="value" :name="name" :placeholder="placeholder"
+               :class="componentClass" :input-class="componentInputClass">
+    </component>
+    <div :class="feedbackClass">{{errors.first(name)}}</div>
   </div>
 </template>
 
+
 <script>
+  /*
+    @html because wysiwyg emits only 'html' and 'change' events
+    ll instead of label because multiselect uses label for its specific needs
+    multiselect does not have input red border because there is neither SASS nor CSS file provided
+    computed name is for messages displayed by validation
+    component inherits vee validator so all its data will be available in parent component
+    input-class binding is for bootstrap-like datetime picker displaying
+  */
+
   export default {
     name: 'CInput',
     inheritAttrs: false,
     inject: ['$validator'],
     props: {
-      label: {
+      ll: {
         type: String,
         required: true
       },
       value: {
-        type: [String, Number]
+        type: [String, Number, Array]
       },
-      placeholder: {
+      ph: {
         type: [Boolean, String],
         default: false
+      },
+      component: {
+        type: String,
+        default: 'b-form-input',
+        validator: function (value) {
+          return ['b-form-input', 'datetime', 'multiselect', 'wysiwyg'].includes(value)
+        }
+      }
+    },
+    data () {
+      return {
+        prevState: null
       }
     },
     computed: {
       name: function () {
-        return this.$attrs.name ? this.$attrs.name : this.label.toLowerCase()
+        return this.$attrs.name ? this.$attrs.name : this.ll.toLowerCase()
       },
-      ph: function () {
-        return this.placeholder.length ? this.placeholder : this.placeholder ? this.label : ''
+      placeholder: function () {
+        return this.ph.length ? this.ph : this.ph ? this.ll : ''
       },
       state: function () {
-        return this.errors.items.length ? ! this.errors.has(this.name) : null
+        const hasErrors = this.errors.has(this.name)
+
+        if (hasErrors)
+          this.prevState = false
+        else if (this.prevState === null)
+          this.prevState = null
+        else if (this.prevState === false)
+          this.prevState = true
+
+        return this.prevState
+      },
+      defaultClass: function () {
+        return 'form-control' + (this.state === null ? '' : this.state ? ' is-valid' : ' is-invalid')
+      },
+      wysiwygClass: function () {
+        return this.state === null ? '' : this.state ? ' editr-valid' : 'editr-invalid'
+      },
+      componentClass: function () {
+        switch (this.component) {
+          case 'b-form-input':
+            return this.defaultClass
+          case 'wysiwyg':
+            return this.wysiwygClass
+          default:
+            return ''
+        }
+      },
+      componentInputClass: function () {
+        switch (this.component) {
+          case 'datetime':
+            return this.defaultClass
+          default:
+            return ''
+        }
+      },
+      feedbackClass: function () {
+        return {
+          'invalid-feedback': true,
+          'd-block': this.state === false
+        }
       }
     },
     methods: {
@@ -46,6 +107,14 @@
   }
 </script>
 
-<style>
+<style scoped>
+  .editr-valid {
+    border: 1px solid #28a745;
+    width: 100%;
+  }
 
+  .editr-invalid {
+    border: 1px solid #dc3545;
+    width: 100%;
+  }
 </style>
