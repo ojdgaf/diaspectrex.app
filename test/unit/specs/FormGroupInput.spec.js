@@ -1,5 +1,5 @@
 import {mount} from 'vue-test-utils'
-import FormGroupInput from 'src/components/UIComponents/Inputs/formGroupInput.vue'
+import FormGroupInput from 'src/components/UIComponents/Inputs/Input.vue'
 
 describe('form group input', () => {
   it('should work with v-model', () => {
