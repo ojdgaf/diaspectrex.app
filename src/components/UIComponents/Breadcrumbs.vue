@@ -3,7 +3,7 @@
         <ul>
             <li>
                 <router-link :to="{name: 'Index'}">
-                    <i class="fa fa-home"></i>
+                  <i class="fas fa-home"></i>
                 </router-link>
             </li>
             <li v-for="link in links">

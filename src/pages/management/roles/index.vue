@@ -33,7 +33,7 @@
     data () {
       return {
         tableColumns: [
-          {display: 'Name', actual: 'name'},
+          'Name',
           {display: 'Title', actual: 'display_name'},
           'Description'
         ],
@@ -43,12 +43,12 @@
               name: 'roles.edit',
               params: {id: 'id'}
             },
-            display: `<i class="fa fa-edit"></i>`
+            display: `<i class="fas fa-pencil-alt"></i>`
           },
           {
             method: this.deleteRole,
             class: 'btn-danger',
-            display: `<i class="fa fa-trash"></i>`
+            display: `<i class="fas fa-trash"></i>`
           }
         ],
         tableData: null

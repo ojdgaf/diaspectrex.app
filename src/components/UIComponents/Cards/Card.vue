@@ -17,6 +17,7 @@
 </template>
 <script>
   export default {
-    name: 'card'
+    name: 'card',
+    inject: ['$validator'],
   }
 </script>

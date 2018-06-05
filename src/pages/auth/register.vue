@@ -3,43 +3,40 @@
     <div class="card" style="width: 18rem;">
       <img class="card-img-top" src="static/img/diaspectrex.jpg" alt="logo">
       <div class="card-body">
-        <form v-on:submit.prevent="register()">
-          <fg-input v-model="user.email" v-validate="'required|email'"
-                    type="email" name="email" placeholder="Email">
-          </fg-input>
+        <form v-if="userIsReady" v-on:submit.prevent="register()">
+          <c-input v-model="user.email" v-validate="'required|email'" ll="Email" ph>
+          </c-input>
 
-          <fg-input v-model="user.first_name" v-validate="'required|alpha'"
-                    name="first_name" placeholder="First name">
-          </fg-input>
+          <c-input v-model="user.first_name" v-validate="'required|alpha|min:2|max:255'"
+                   ll="First name" ph="">
+          </c-input>
 
-          <fg-input v-model="user.middle_name" v-validate="'alpha'"
-                    name="middle_name" placeholder="Middle name">
-          </fg-input>
+          <c-input v-model="user.middle_name" v-validate="'alpha|min:2|max:255'"
+                   ll="Middle name" ph>
+          </c-input>
 
-          <fg-input v-model="user.last_name" v-validate="'required|alpha'"
-                    name="last_name" placeholder="Last name">
-          </fg-input>
+          <c-input v-model="user.last_name" v-validate="'required|alpha|min:2|max:255'"
+                   ll="Last name" ph>
+          </c-input>
 
           <div class="text-center">
             <c-radio v-model="user.sex" label="male" inline>Male</c-radio>
             <c-radio v-model="user.sex" label="female" inline>Female</c-radio>
           </div>
 
-          <div class="form-group">
-            <datetime v-model="user.birthday" v-validate="'required'"
-                      name="birthday" input-class="form-control" placeholder="Birthday">
-            </datetime>
-          </div>
+          <c-input v-model="user.birthday" v-validate="'required'" component="datetime"
+                   ll="Birthday" ph>
+          </c-input>
 
-          <fg-input v-model="user.password" :type="passwordFieldType"
-                    v-validate="'required|confirmed:password_confirmation'"
-                    name="password" placeholder="Password">
-          </fg-input>
+          <c-input v-model="user.password" :type="passwordFieldType"
+                   v-validate="'required|min:6|confirmed:password confirmation'"
+                   ll="Password" ph>
+          </c-input>
 
-          <fg-input v-model="user.password_confirmation" :type="passwordFieldType"
-                    v-validate="'required'"
-                    name="password_confirmation" placeholder="Confirm password">
-          </fg-input>
+          <c-input v-model="user.password_confirmation" :type="passwordFieldType"
+                   v-validate="'required'"
+                   name="password confirmation" ll="Confirm password" ph>
+          </c-input>
 
           <button @click="switchVisibility" type="button" class="btn btn-dark btn-sm">
             {{passwordButtonText}}
@@ -67,13 +64,16 @@
     data () {
       return {
         passwordFieldType: 'password',
-        user: {}
+        user: null
       }
     },
     created: function () {
       this.$user().then(user => this.user = user)
     },
     computed: {
+      userIsReady: function () {
+        return this.user !== null
+      },
       passwordButtonText: function () {
         return this.passwordFieldType === 'password' ? 'show' : 'hide'
       }
@@ -101,7 +101,7 @@
       preparedUser () {
         let user = this._.cloneDeep(this.user)
 
-        user.birthday = unix(user.birthday)
+        user.birthday = this.$unix(user.birthday)
 
         return user
       }

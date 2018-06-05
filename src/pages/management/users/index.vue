@@ -44,12 +44,12 @@
               name: 'users.edit',
               params: {id: 'id'}
             },
-            display: `<i class="fa fa-edit"></i>`
+            display: `<i class="fas fa-user-edit"></i>`
           },
           {
             method: this.deleteUser,
             class: 'btn-danger',
-            display: `<i class="fa fa-trash"></i>`
+            display: `<i class="fas fa-user-alt-slash"></i>`
           }
         ],
         tableData: null

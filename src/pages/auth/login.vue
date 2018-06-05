@@ -4,9 +4,11 @@
       <img class="card-img-top" src="static/img/diaspectrex.jpg" alt="logo">
       <div class="card-body">
         <form v-on:submit.prevent="login()">
-          <fg-input placeholder="Email" v-model="credentials.email"></fg-input>
+          <c-input v-model="credentials.email" v-validate="'required|email'" ll="Email" ph>
+          </c-input>
 
-          <fg-input placeholder="Password" v-model="credentials.password"></fg-input>
+          <c-input v-model="credentials.password" v-validate="'required'" ll="Password" ph>
+          </c-input>
 
           <p class="text-right">
             <router-link :to="{ name: 'Password request' }" class="small ml-auto my-auto">
@@ -43,6 +45,10 @@
     },
     methods: {
       login () {
+        this.$validator.validateAll()
+          .then(result => result ? this.performLoginRequest() : this.$unfortunately('Please check input'))
+      },
+      performLoginRequest () {
         this.$auth.login({
           data: this.credentials,
           rememberMe: true,
@@ -50,7 +56,8 @@
           redirect: {
             name: 'Index'
           },
-          error: function () {}
+          error: function () {
+          }
         })
       }
     }

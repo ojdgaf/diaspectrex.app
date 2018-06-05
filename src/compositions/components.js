@@ -1,4 +1,4 @@
-import fgInput from 'src/components/UIComponents/Inputs/formGroupInput.vue'
+import CInput from 'src/components/UIComponents/Inputs/Input.vue'
 import DropDown from 'src/components/UIComponents/Dropdown.vue'
 import CRadio from 'src/components/UIComponents/Inputs/Radio.vue'
 import Card from 'src/components/UIComponents/Cards/Card.vue'
@@ -15,7 +15,7 @@ import bFormInvalidFeedback from 'bootstrap-vue/es/components/form/form-invalid-
  */
 export default {
   install (Vue) {
-    Vue.component('fg-input', fgInput)
+    Vue.component('c-input', CInput)
     Vue.component('drop-down', DropDown)
     Vue.component('c-radio', CRadio)
     Vue.component('card', Card)

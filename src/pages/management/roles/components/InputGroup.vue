@@ -1,22 +1,23 @@
 <template>
   <div>
     <div class="row justify-content-center">
-      <fg-input v-model="role.name" label="Name" placeholder="Name"></fg-input>
+      <c-input v-model="role.name" v-validate="'required|alpha|min:3'" ll="Name" ph>
+      </c-input>
     </div>
     <div class="row justify-content-center">
-      <fg-input v-model="role.display_name" label="Title" placeholder="Title"></fg-input>
+      <c-input v-model="role.display_name" v-validate="'required|alpha|min:3'" ll="Title" ph>
+      </c-input>
     </div>
     <div class="row justify-content-center">
-      <fg-input v-model="role.description" label="Description" placeholder="Description"></fg-input>
+      <c-input v-model="role.description" v-validate="'alpha|min:6'" ll="Description" ph>
+      </c-input>
     </div>
     <div class="row justify-content-center">
-      <div class="form-group">
-        <label class="control-label">Role</label>
-        <multiselect v-if="permissionsAreReady" v-model="role.permissions" :options="permissions"
-                     :multiple="true" label="name" track-by="id"
-                     placeholder="Select permissions">
-        </multiselect>
-      </div>
+      <c-input v-if="permissionsAreReady" v-model="role.permissions"
+               v-validate="'required'" :options="permissions" :multiple="true"
+               label="name" track-by="id" ll="Permissions" ph="Select permissions"
+               component="multiselect">
+      </c-input>
     </div>
     <div class="row">
       <div class="col-md-6 col-sm-12 offset-md-3 text-right">

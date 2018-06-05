@@ -1,9 +1,9 @@
 import {mount} from 'vue-test-utils'
-import FormGroupInput from 'src/components/UIComponents/Inputs/formGroupInput.vue'
+import CInput from 'src/components/UIComponents/Inputs/Input.vue'
 
 describe('form group input', () => {
   it('should work with v-model', () => {
-    const wrapper = mount(FormGroupInput, {
+    const wrapper = mount(CInput, {
       propsData: {
         value: 'initial'
       }
@@ -16,7 +16,7 @@ describe('form group input', () => {
     expect(emitted.input[0]).to.deep.equal(['new value'])
   })
   it('should have a label', () => {
-    const wrapper = mount(FormGroupInput, {
+    const wrapper = mount(CInput, {
       propsData: {
         label: 'my label'
       }

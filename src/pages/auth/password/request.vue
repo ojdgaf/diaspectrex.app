@@ -3,8 +3,8 @@
     <div class="login">
       <div class="card" style="width: 18rem;">
         <div class="card-body">
-          <form v-on:submit.prevent="sendResetLinkEmail()">
-            <fg-input v-model="payload.email" placeholder="Email"></fg-input>
+          <form v-on:submit.prevent="request()">
+            <c-input v-model="payload.email" v-validate="'required|email'" ll="Email" ph></c-input>
 
             <div class="text-center">
               <button class="btn btn-default mx-auto" type="submit">Send reset link</button>
@@ -23,18 +23,19 @@
     data () {
       return {
         payload: {
-          email: 'a@a.a',
+          email: 'a@a.a'
         }
       }
     },
     methods: {
+      request () {
+        this.$validator.validateAll()
+          .then(result => result ? this.sendResetLinkEmail() : this.$unfortunately('Please check input'))
+      },
       sendResetLinkEmail () {
         this.axios.post('auth/password/email', this.payload)
-          .then(response => {
-            this.payload.email = ''
-            this.$successfully(response.message)
-          })
-          .catch(error => {})
+          .then(res => this.payload.email = '')
+          .catch(err => {})
       }
     }
   }

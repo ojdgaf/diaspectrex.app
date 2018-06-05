@@ -2,7 +2,7 @@
     <div class="title-wrapper">
         <h4 class="card-title col-md-6">{{ title }}</h4>
         <router-link :to="addLink ? addLink : '#'" class="btn btn-success" v-show="addLink">
-            <i class="fa fa-plus"></i>
+          <i class="fas fa-plus"></i>
         </router-link>
     </div>
 </template>

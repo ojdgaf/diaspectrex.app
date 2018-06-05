@@ -1,5 +1,5 @@
 <template>
-  <th>{{value}}</th>
+  <th v-html="value" class="text-center"></th>
 </template>
 
 <script>
