@@ -1,8 +1,8 @@
 <template>
   <div class="form-group">
-    <label v-if="ll" class="control-label">{{ll}}</label>
+    <label v-if="ll" :for="id" class="control-label">{{ll}}</label>
     <component v-bind="$attrs" @input="emit" @html="emit"
-               :is="component" :value="value" :name="name" :placeholder="placeholder"
+               :is="component" :id="id" :value="value" :name="name" :placeholder="placeholder"
                :class="componentClass" :input-class="componentInputClass">
     </component>
     <div :class="feedbackClass">{{errors.first(name)}}</div>
@@ -25,12 +25,10 @@
     inheritAttrs: false,
     inject: ['$validator'],
     props: {
+      value: {},
       ll: {
         type: String,
         required: true
-      },
-      value: {
-        type: [String, Number, Array]
       },
       ph: {
         type: [Boolean, String],
@@ -46,8 +44,12 @@
     },
     data () {
       return {
+        id: '',
         prevState: null
       }
+    },
+    created () {
+      this.id = Math.random().toString(16).slice(2)
     },
     computed: {
       name: function () {
