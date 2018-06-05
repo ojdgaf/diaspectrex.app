@@ -5,7 +5,7 @@
                :is="component" :id="id" :value="value" :name="name" :placeholder="placeholder"
                :class="componentClass" :input-class="componentInputClass">
     </component>
-    <div :class="feedbackClass">{{errors.first(name)}}</div>
+    <div :class="feedbackClass">{{errors.first(scopedName)}}</div>
   </div>
 </template>
 
@@ -26,6 +26,10 @@
     inject: ['$validator'],
     props: {
       value: {},
+      scope: {
+        type: String,
+        default: ''
+      },
       ll: {
         type: String,
         required: true
@@ -55,11 +59,14 @@
       name: function () {
         return this.$attrs.name ? this.$attrs.name : this.ll.toLowerCase()
       },
+      scopedName: function () {
+        return (this.scope ? this.scope + '.' : '') + this.name
+      },
       placeholder: function () {
         return this.ph.length ? this.ph : this.ph ? this.ll : ''
       },
       state: function () {
-        const hasErrors = this.errors.has(this.name)
+        const hasErrors = this.errors.has(this.scopedName)
 
         if (hasErrors)
           this.prevState = false
