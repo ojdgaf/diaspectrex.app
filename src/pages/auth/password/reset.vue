@@ -2,13 +2,21 @@
   <div class="row">
     <div class="col-sm-6 offset-3">
       <form v-on:submit.prevent="reset()">
-        <fg-input v-model="payload.email" required placeholder="Email"></fg-input>
+        <c-input v-model="payload.email" v-validate="'required|email'" ll="Email" ph></c-input>
 
-        <fg-input v-model="payload.password" :type="passwordFieldType" required placeholder="Password"></fg-input>
+        <c-input v-model="payload.password" :type="passwordFieldType"
+                 v-validate="'required|min:6|confirmed:password confirmation'"
+                 ll="Password" ph>
+        </c-input>
 
-        <fg-input v-model="payload.password_confirmation" :type="passwordFieldType" required placeholder="Confirm password"></fg-input>
+        <c-input v-model="payload.password_confirmation" :type="passwordFieldType"
+                 v-validate="'required'"
+                 name="password confirmation" ll="Confirm password" ph>
+        </c-input>
 
-        <button type="button" @click="switchVisibility">show / hide</button>
+        <button @click="switchVisibility" type="button" class="btn btn-dark btn-sm">
+          {{passwordButtonText}}
+        </button>
 
         <div class="text-center">
           <button class="btn btn-default mx-auto" type="submit">Reset password</button>
@@ -20,14 +28,14 @@
 
 <script>
   export default {
-    data() {
+    data () {
       return {
         passwordFieldType: 'password',
         payload: {
           email: '',
           password: '',
           password_confirmation: '',
-          token: '',
+          token: ''
         }
       }
     },
@@ -35,28 +43,23 @@
       this.payload.email = this.$route.query.email
       this.payload.token = this.$route.params.token
     },
+    computed: {
+      passwordButtonText: function () {
+        return this.passwordFieldType === 'password' ? 'show' : 'hide'
+      }
+    },
     methods: {
       switchVisibility () {
         this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password'
       },
       reset () {
-        if (! this.checkPasswordConformation()) {
-          this.$unfortunately('The password confirmation does not match')
-          this.payload.password_confirmation = ''
-          return
-        }
-
-        this.performReset()
-      },
-      checkPasswordConformation () {
-        return this.payload.password === this.payload.password_confirmation
+        this.$validator.validateAll()
+          .then(result => result ? this.performReset() : this.$unfortunately('Please check input'))
       },
       performReset () {
         this.axios.post('auth/password/reset', this.payload)
-          .then(response => {
-            this.login()
-          })
-          .catch(error => {})
+          .then(res => this.login())
+          .catch(err => {})
       },
       login () {
         this.$auth.login({

@@ -27,9 +27,9 @@
         <p>Notifications</p>
       </sidebar-link>
 
-      <sidebar-link to="/admin/management/users">
-        <i class="fa fa-users"></i>
-        <p>Users</p>
+      <sidebar-link to="/admin/management">
+        <i class="fa fa-sliders"></i>
+        <p>Management</p>
       </sidebar-link>
 
       <sidebar-link to="/admin/hospitals">
