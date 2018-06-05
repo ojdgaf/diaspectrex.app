@@ -3,13 +3,13 @@
     <table class="table table-hover">
       <thead>
       <slot name="columns">
-        <th v-if="buttonsFirst && buttons.length">Operations</th>
+        <th v-if="buttonsFirst && buttons.length" class="text-center">Operations</th>
 
         <template v-for="column in columns">
           <c-th :column="column"></c-th>
         </template>
 
-        <th v-if="! buttonsFirst && buttons.length">Operations</th>
+        <th v-if="! buttonsFirst && buttons.length" class="text-center">Operations</th>
       </slot>
       </thead>
       <tbody>
