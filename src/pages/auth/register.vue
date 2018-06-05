@@ -7,13 +7,16 @@
           <c-input v-model="user.email" v-validate="'required|email'" ll="Email" ph>
           </c-input>
 
-          <c-input v-model="user.first_name" v-validate="'required|alpha'" ll="First name" ph="">
+          <c-input v-model="user.first_name" v-validate="'required|alpha|min:2|max:255'"
+                   ll="First name" ph="">
           </c-input>
 
-          <c-input v-model="user.middle_name" v-validate="'alpha'" ll="Middle name" ph>
+          <c-input v-model="user.middle_name" v-validate="'alpha|min:2|max:255'"
+                   ll="Middle name" ph>
           </c-input>
 
-          <c-input v-model="user.last_name" v-validate="'required|alpha'" ll="Last name" ph>
+          <c-input v-model="user.last_name" v-validate="'required|alpha|min:2|max:255'"
+                   ll="Last name" ph>
           </c-input>
 
           <div class="text-center">
@@ -98,7 +101,7 @@
       preparedUser () {
         let user = this._.cloneDeep(this.user)
 
-        user.birthday = unix(user.birthday)
+        user.birthday = this.$unix(user.birthday)
 
         return user
       }
