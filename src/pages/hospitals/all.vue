@@ -39,11 +39,11 @@
                                             <div class="text-left">
                                                 <button class="btn btn-info">
                                                     <router-link :to="{name: 'hospitals.edit', params: { id: hospital.id} }">
-                                                        <i class="fa fa-pencil"></i>
+                                                      <i class="fas fa-pencil-alt"></i>
                                                     </router-link>
                                                 </button>
                                                 <button class="btn btn-danger" @click="deleteHospital(hospital.id)">
-                                                    <i class="fa fa-trash"></i>
+                                                  <i class="fas fa-trash"></i>
                                                 </button>
                                             </div>
                                         </td>

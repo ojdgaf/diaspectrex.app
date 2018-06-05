@@ -39,6 +39,9 @@ import PatientCardsIndex from '@/pages/patient_cards/index.vue'
 import PatientCardsCreate from '@/pages/patient_cards/create.vue'
 import PatientCardsEdit from '@/pages/patient_cards/edit.vue'
 
+import ServicesIndex from 'src/pages/services/index'
+import ServicesEdit from 'src/pages/services/edit'
+
 const routes = [
   {
     path: '/',
@@ -125,7 +128,7 @@ const routes = [
       {
         path: 'management/users/create',
         name: 'users.create',
-        component: UsersCreate,
+        component: UsersCreate
       },
       {
         path: 'management/users/:id(\\d+)/edit',
@@ -143,7 +146,7 @@ const routes = [
       {
         path: 'management/roles/create',
         name: 'roles.create',
-        component: RolesCreate,
+        component: RolesCreate
       },
       {
         path: 'management/roles/:id(\\d+)/edit',
@@ -170,24 +173,37 @@ const routes = [
         component: HospitalsEdit,
         props: true
       },
-
-      //patient cards
+      
+      // patient cards
       {
-          path: 'patient-cards',
-          name: 'patient_cards.index',
-          component: PatientCardsIndex
+        path: 'patient-cards',
+        name: 'patient_cards.index',
+        component: PatientCardsIndex
       },
       {
-          path: 'patient-cards/create',
-          name: 'patient_cards.create',
-          component: PatientCardsCreate,
-          props: true
+        path: 'patient-cards/create',
+        name: 'patient_cards.create',
+        component: PatientCardsCreate,
+        props: true
       },
       {
-          path: 'patient-cards/:id(\\d+)/edit',
-          name: 'patient_cards.edit',
-          component: PatientCardsEdit,
-          props: true
+        path: 'patient-cards/:id(\\d+)/edit',
+        name: 'patient_cards.edit',
+        component: PatientCardsEdit,
+        props: true
+      },
+      
+      // services
+      {
+        path: 'services',
+        name: 'services.index',
+        component: ServicesIndex
+      },
+      {
+        path: 'services/:id(\\d+)/edit',
+        name: 'services.edit',
+        component: ServicesEdit,
+        props: true
       }
     ]
   },

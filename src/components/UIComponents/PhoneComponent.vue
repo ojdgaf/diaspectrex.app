@@ -17,7 +17,7 @@
         </div>
         <div class="text-right add-btn-wrapper">
             <button class="btn btn-default btn-fill btn-icon" @click="addPhoneField">
-                <i class="fa fa-plus"></i>
+              <i class="fas fa-plus"></i>
             </button>
         </div>
     </div>

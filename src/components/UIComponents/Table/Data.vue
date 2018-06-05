@@ -21,14 +21,14 @@
     data () {
       return {
         booleans: {
-          true: `<i class="fa fa-check"></i>`,
-          false: `<i class="fa fa-minus"></i>`
+          true: `<i class="fas fa-check"></i>`,
+          false: `<i class="fas fa-minus"></i>`
         },
         strings: {
-          male: `<i class="fa fa-male"></i>`,
-          female: `<i class="fa fa-female"></i>`
+          male: `<i class="fas fa-male"></i>`,
+          female: `<i class="fas fa-female"></i>`
         },
-        empty: `<i class="fa fa-times"></i>`
+        empty: `<i class="fas fa-times"></i>`
       }
     },
     computed: {

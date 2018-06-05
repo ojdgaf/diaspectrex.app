@@ -2,7 +2,7 @@
   <ul class="nav nav-mobile-menu">
     <drop-down>
       <template slot="title">
-        <i class="fa fa-globe"></i>
+        <i class="fas fa-globe"></i>
         <b class="caret"></b>
         <span class="notification">5 Notifications</span>
       </template>
