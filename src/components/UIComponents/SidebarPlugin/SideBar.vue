@@ -6,10 +6,9 @@
     <div class="sidebar-wrapper">
       <div class="logo">
         <a href="#" class="simple-text">
-            <div class="logo-img">
-                <img src="static/img/vue-logo.png" alt="">
+            <div class="logo-wrapper">
+                <img src="static/img/logo.png" alt="DiaSpectrEx">
             </div>
-          {{title}}
         </a>
       </div>
 
@@ -40,7 +39,7 @@
     props: {
       title: {
         type: String,
-        default: 'Vue LBD'
+        default: ''
       },
       backgroundColor: {
         type: String,
@@ -52,7 +51,7 @@
       },
       backgroundImage: {
         type: String,
-        default: 'static/img/sidebar-5.jpg'
+        default: 'static/img/sidebar-4.jpg'
       },
       activeColor: {
         type: String,
@@ -86,6 +85,16 @@
   }
 
 </script>
-<style>
+
+<style scoped>
+
+  .logo-wrapper {
+    max-width: 220px;
+  }
+
+  .logo-wrapper img {
+    max-width: 200px;
+    padding: 5px;
+  }
 
 </style>
