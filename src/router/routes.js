@@ -40,6 +40,7 @@ import PatientCardsCreate from '@/pages/patient_cards/create.vue'
 import PatientCardsEdit from '@/pages/patient_cards/edit.vue'
 
 import ServicesIndex from 'src/pages/services/index'
+import ServicesCreate from 'src/pages/services/create'
 import ServicesEdit from 'src/pages/services/edit'
 
 const routes = [
@@ -198,6 +199,11 @@ const routes = [
         path: 'services',
         name: 'services.index',
         component: ServicesIndex
+      },
+      {
+        path: 'services/create',
+        name: 'services.create',
+        component: ServicesCreate
       },
       {
         path: 'services/:id(\\d+)/edit',
