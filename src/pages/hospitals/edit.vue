@@ -35,7 +35,7 @@
                                             <b-tab title="Phones" >
                                                 <phone-component
                                                     ref="phonesComponent"
-                                                    :phones="hospital.phones"
+                                                    :entity-phones="hospital.phones"
                                                 ></phone-component>
                                             </b-tab>
                                         </b-tabs>

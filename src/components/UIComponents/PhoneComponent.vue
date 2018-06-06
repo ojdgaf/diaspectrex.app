@@ -26,38 +26,27 @@
 <script>
     export default {
         props: {
-            entityModel: {
-                type: String,
-                required: true
+            entityPhones: {
+                type: Array
             }
         },
         data () {
             return {
                 phones: [
-                    {
-                        number: '',
-                        phoneable_type: this.entityModel
-                    }
+                    { number: '' }
                 ]
             }
         },
-        mounted: function () {
-          if (this.phones.length === 0)
-              this.phones.push(
-                  {
-                      number: '',
-                      phoneable_type: this.entityModel
-                  }
-              );
+        created: function () {
+            setTimeout(() => {
+                this.phones = this.computedPhones;
+            }, 1000);
         },
         methods: {
             addPhoneField () {
                 if (this.phones[this.phones.length - 1].number){
                     if (this.isAllPhonesValid())
-                        this.phones.push( {
-                            number: '',
-                            phoneable_type: this.entityModel
-                        } );
+                        this.phones.push( { number: '' } );
                     else
                         this.$unfortunately('Invalid phone(s)! Phone(s) must contain only numbers, without plus, ' +
                             'with country code, length: from 10 to 12 numbers. Check all before add next one.');
@@ -84,6 +73,14 @@
             },
             getPhones() {
                 return this.phones.filter( phone => phone.number !== '');
+            },
+            getDefaultPhonesArray () {
+                return [ { number: '' } ];
+            }
+        },
+        computed: {
+            computedPhones: function () {
+                return this.entityPhones || this.getDefaultPhonesArray();
             }
         }
     }
