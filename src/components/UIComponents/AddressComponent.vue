@@ -69,6 +69,9 @@
             hasFlat: {
                 type: Boolean,
                 default: false
+            },
+            addr: {
+                type: Object
             }
         },
         data () {
@@ -91,12 +94,13 @@
         created: async function () {
             await this.getCountries().then(countries => this.countries = countries );
 
+            this.address = this.computedAddress;
+
             if (this.address.country){
                 await this.getCountryRegions(this.address.country.id).then(regions => this.regions = regions);
                 await this.getRegionCities(this.address.region.id).then(cities => this.cities = cities);
                 await this.getCityStreets(this.address.city.id).then(streets => this.streets = streets);
             }
-
         },
         methods: {
             async getCountries () {
@@ -145,11 +149,6 @@
                     await this.saveAddress().then(address => addressId = address.id);
                 return addressId;
             },
-            /*
-            async getAddress(){
-                let response = await this.axios.get(`/addresses/${this.addressId}`);
-                return response.data;
-            },*/
             getAddress () {
                 if (this.address.country)
                     return {
@@ -163,6 +162,17 @@
                     };
 
                 return null;
+            },
+            getDefaultAddressObject () {
+                return {
+                    country: null,
+                    region: null,
+                    city: null,
+                    street: null,
+                    building: '',
+                    flat: '',
+                    postal_code: ''
+                };
             }
         },
         watch: {
@@ -178,6 +188,11 @@
             },
             addressId: function (value) {
                 this.addressId = parseInt(value);
+            }
+        },
+        computed: {
+            computedAddress: function () {
+                return this.addr || this.getDefaultAddressObject();
             }
         }
     }

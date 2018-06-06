@@ -29,6 +29,7 @@
                                             <b-tab title="Address">
                                                 <address-component
                                                     ref="addressComponent"
+                                                    :addr="hospital.address"
                                                 ></address-component>
                                             </b-tab>
                                             <b-tab title="Phones" >
@@ -72,9 +73,8 @@
             this.getHospital().then(hospital => {
                 this.hospital.name = hospital.name;
                 this.hospital.description = hospital.description;
+                this.hospital.address = hospital.address;
 
-                if (hospital.address)
-                    this.$refs.addressComponent.address = hospital.address;
                 if (hospital.phones.length > 0)
                     this.$refs.phonesComponent.phones = hospital.phones;
             });
