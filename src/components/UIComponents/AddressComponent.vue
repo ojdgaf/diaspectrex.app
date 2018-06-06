@@ -70,7 +70,7 @@
                 type: Boolean,
                 default: false
             },
-            addr: {
+            entityAddress: {
                 type: Object
             }
         },
@@ -192,7 +192,7 @@
         },
         computed: {
             computedAddress: function () {
-                return this.addr || this.getDefaultAddressObject();
+                return this.entityAddress || this.getDefaultAddressObject();
             }
         }
     }

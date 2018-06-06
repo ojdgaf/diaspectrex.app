@@ -29,13 +29,13 @@
                                             <b-tab title="Address">
                                                 <address-component
                                                     ref="addressComponent"
-                                                    :addr="hospital.address"
+                                                    :entity-address="hospital.address"
                                                 ></address-component>
                                             </b-tab>
                                             <b-tab title="Phones" >
                                                 <phone-component
-                                                    entity-model="Hospital"
                                                     ref="phonesComponent"
+                                                    :phones="hospital.phones"
                                                 ></phone-component>
                                             </b-tab>
                                         </b-tabs>
@@ -71,12 +71,10 @@
         },
         created () {
             this.getHospital().then(hospital => {
-                this.hospital.name = hospital.name;
+                this.hospital.name        = hospital.name;
                 this.hospital.description = hospital.description;
-                this.hospital.address = hospital.address;
-
-                if (hospital.phones.length > 0)
-                    this.$refs.phonesComponent.phones = hospital.phones;
+                this.hospital.address     = hospital.address;
+                this.hospital.phones      = hospital.phones;
             });
         },
         methods: {
