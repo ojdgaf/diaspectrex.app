@@ -35,7 +35,7 @@
         </c-input>
       </div>
       <div class="col-md-4 col-sm-12">
-        <c-input v-model="user.password" v-show="! userExists" v-validate="'required|min:6'"
+        <c-input v-model="user.password" v-if="! userExists" v-validate="'required|min:6'"
                  ll="Password" ph>
         </c-input>
       </div>
@@ -108,9 +108,9 @@
     </div>
 
     <div class="row">
-      <address-component :address-id="user.address_id" :has-flat="true" ref="addressComponent"
-                         class="col-md-8 col-sm-12 offset-md-2">
-      </address-component>
+      <address-component ref="addressComponent" :entity-address="user.address" :has-flat="true"
+                         class="col-md-8 col-sm-12 offset-md-2"
+      ></address-component>
     </div>
 
     <hr>
@@ -147,7 +147,7 @@
         return this.user !== null
       },
       userExists: function () {
-        return ! ! this.user.id
+        return !! this.user.id
       },
       rolesAreReady: function () {
         return this.roles !== null
