@@ -181,5 +181,4 @@
   .btn-info:hover {
     background-color: #30d6c9;
   }
-
 </style>
