@@ -1,18 +1,41 @@
 <template>
-  <div>
-    <div class="login">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
+  <div class="request">
+    <div class="card">
+      <div class="card-body col-xs-12 col-sm-12 col-md-6 col-lg-4">
+        <div class="card-body-content">
+          <div class="logo-wrapper">
+            <img class="card-img-top" src="static/img/logo.png" alt="DiaSpectrEx">
+          </div>
           <form v-on:submit.prevent="request()">
-            <c-input v-model="payload.email" v-validate="'required|email'" ll="Email" ph></c-input>
-
-            <div class="text-center">
-              <button class="btn btn-default mx-auto" type="submit">Send reset link</button>
+            <div class="form-group">
+              <label>
+                Email:
+              </label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                <span class="input-group-text" id="email-addon">
+                  <i class="fas fa-envelope"></i>
+                </span>
+                </div>
+                <input type="text" class="form-control"
+                       v-model="payload.email"
+                       v-validate="'required|email'"
+                       placeholder="Type email..." aria-describedby="email-addon">
+              </div>
             </div>
 
-            <p class="mt-5 mb-3 text-muted text-center">&copy; 2018 DiaSpectrEx</p>
+            <div class="text-center">
+              <button class="btn btn-info btn-fill btn-block" type="submit">
+                Send reset link
+              </button>
+            </div>
           </form>
         </div>
+      </div>
+      <div class="copyright text-center">
+        &copy; All rights reserved |
+        <a href="https://github.com/roman-dubovoy" target="_blank">Roman Dubovoy</a> |
+        <a href="https://github.com/ojdgaf" target="_blank">Eugene Burdeinyi</a> | 2018.
       </div>
     </div>
   </div>
@@ -42,54 +65,72 @@
 </script>
 
 <style scoped>
-  .login {
-    height: 100%;
-    display: -ms-flexbox;
-    display: -webkit-box;
+  .card {
+    height: 100vh;
     display: flex;
-    -ms-flex-align: center;
-    -ms-flex-pack: center;
-    -webkit-box-align: center;
+    flex-flow: column nowrap;
+    justify-content: space-between;
     align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    background-color: #f5f5f5;
+    background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5) ), url('/static/img/background-1.jpg')
+    no-repeat center;
+    background-size: cover;
+    border: none;
   }
 
-  .form-signin {
-    width: 100%;
-    max-width: 330px;
-    padding: 15px;
-    margin: 0 auto;
+  .card-body {
+    flex-grow: 2;
   }
 
-  .form-signin .checkbox {
-    font-weight: 400;
+  .card-body-content {
+    height: 265px;
+    background-color: #fff;
+    padding: 5px 40px;
+    margin-top: 90px;
+    border-radius: 15px;
   }
 
-  .form-signin .form-control {
-    position: relative;
-    box-sizing: border-box;
-    height: auto;
-    padding: 10px;
-    font-size: 16px;
+  .logo-wrapper {
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    text-align: center;
+    border-bottom: 2px solid #26a69a;
   }
 
-  .form-signin .form-control:focus {
-    z-index: 2;
+  .logo-wrapper img {
+    max-width: 300px;
   }
 
-  .form-signin input[type="email"] {
-    margin-bottom: -1px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
+  .copyright {
+    padding: 20px 0;
+    color: #fff;
+    font-weight: 300;
+    font-size: 0.9em;
   }
 
-  .form-signin input[type="password"] {
-    margin-bottom: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+  .copyright a {
+    color: #fff;
   }
+
+  .copyright a:hover {
+    color: #1DC7EA;
+  }
+
+  label {
+    text-transform: uppercase;
+    color: #a3a3a3;
+    margin-bottom: 0.1rem;
+    font-size: 0.9em;
+  }
+
+  .btn-info {
+    margin-top: 15px;
+    background-color: #26a69a;
+    border: none;
+  }
+
+  .btn-info:hover {
+    background-color: #30d6c9;
+  }
+
 </style>
+
