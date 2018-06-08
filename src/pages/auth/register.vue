@@ -65,45 +65,59 @@
               </div>
             </div>
 
-            <div class="flexible-wrapper">
-              <div class="form-group">
-                <label>
-                  Password:
-                </label>
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                <span class="input-group-text" id="password-addon">
-                  <i class="fas fa-key"></i>
-                </span>
-                  </div>
-                  <input type="password" class="form-control"
-                         v-model="user.password"
-                         v-validate="'required|min:6|confirmed:password confirmation'"
-                         placeholder="Confirm password..." aria-describedby="password-addon">
+            <div class="form-group">
+              <label>
+                Password:
+              </label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+              <span class="input-group-text" id="password-addon">
+                <i class="fas fa-key"></i>
+              </span>
                 </div>
-              </div>
-
-              <div class="form-group">
-                <label>
-                  Confirm password:
-                </label>
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                <span class="input-group-text" id="confirm-password-addon">
-                  <i class="fas fa-key"></i>
-                </span>
-                  </div>
-                  <input type="password" class="form-control"
-                         v-model="user.password_confirmation"
-                         v-validate="'required'"
-                         placeholder="Confirm password..." aria-describedby="confirm-password-addon">
+                <input type="password" class="form-control"
+                       v-model="user.password"
+                       v-validate="'required|min:6|confirmed:password confirmation'"
+                       placeholder="Passsword..." aria-describedby="password-addon">
+                <div class="input-group-append">
+                  <span class="input-group-text btn-eye-wrapper">
+                    <button class="btn-eye" type="button"
+                      @mousedown="showPassword($event)"
+                      @mouseup="hidePassword($event)"
+                    >
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </span>
                 </div>
               </div>
             </div>
 
-            <!--<button @click="switchVisibility" type="button" class="btn btn-dark btn-sm">
-              {{passwordButtonText}}
-            </button>-->
+            <div class="form-group">
+              <label>
+                Confirm password:
+              </label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="confirm-password-addon">
+                    <i class="fas fa-key"></i>
+                  </span>
+                </div>
+                <input type="password" class="form-control"
+                       v-model="user.password_confirmation"
+                       v-validate="'required'"
+                       placeholder="Confirm password..." aria-describedby="confirm-password-addon">
+                <div class="input-group-append">
+                  <span class="input-group-text btn-eye-wrapper">
+                    <button class="btn-eye" type="button"
+                      @mousedown="showPassword($event)"
+                      @mouseup="hidePassword($event)"
+                    >
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
 
             <div class="link-wrapper">
               <router-link :to="{ name: 'Login' }" class="small ml-auto my-auto">
@@ -171,6 +185,12 @@
         user.birthday = this.$unix(user.birthday)
 
         return user
+      },
+      showPassword( e ) {
+          e.target.parentNode.parentNode.parentNode.previousElementSibling.type="text";
+      },
+      hidePassword ( e ) {
+          e.target.parentNode.parentNode.parentNode.previousElementSibling.type="password";
       }
     }
   }
@@ -281,5 +301,32 @@
     text-transform: uppercase;
     color: #a3a3a3;
   }
+
+  input[type="password"] {
+    border-right: none;
+  }
+
+  .btn-eye-wrapper {
+    background: #fff;
+    border-left: none;
+    border-color: #E3E3E3;
+  }
+
+  input[type="password"]:focus + .input-group-append > .btn-eye-wrapper {
+    border-color: #aaa;
+  }
+
+  .btn-eye {
+    background: transparent;
+    color: transparent;
+    border: none;
+    padding: 0;
+    outline: transparent;
+  }
+
+  .btn-eye:hover {
+    color: #333;
+  }
+
 </style>
 

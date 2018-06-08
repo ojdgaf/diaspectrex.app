@@ -24,6 +24,28 @@
               </div>
             </div>
 
+            <div class="input-group">
+              <div class="input-group-prepend">
+                    <span class="input-group-text" id="confirm-password-addon">
+                      <i class="fas fa-key"></i>
+                    </span>
+              </div>
+              <input type="password" class="form-control"
+                     v-model="user.password_confirmation"
+                     v-validate="'required'"
+                     placeholder="Confirm password..." aria-describedby="confirm-password-addon">
+              <div class="input-group-append">
+                    <span class="input-group-text btn-eye-wrapper">
+                      <button class="btn-eye" type="button"
+                              @mousedown="showPassword($event)"
+                              @mouseup="hidePassword($event)"
+                      >
+                        <i class="fas fa-eye"></i>
+                      </button>
+                    </span>
+              </div>
+            </div>
+
             <div class="form-group">
               <label>
                 Password:
@@ -91,9 +113,6 @@
           error: function () {
           }
         })
-      },
-      showPassword( e ) {
-
       }
     }
   }
