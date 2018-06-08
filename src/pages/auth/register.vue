@@ -7,33 +7,22 @@
             <img class="card-img-top" src="static/img/logo.png" alt="DiaSpectrEx">
           </div>
           <form v-if="userIsReady" v-on:submit.prevent="register()">
-            <div class="form-group">
-              <label>First name:</label>
-              <c-input v-model="user.first_name" v-validate="'required|alpha|min:2|max:255'"
-                       ll="" ph="Your first name...">
-              </c-input>
-            </div>
+            <c-input v-model="user.first_name" v-validate="'required|alpha|min:2|max:255'"
+                     ll="First name" ph="Your first name...">
+            </c-input>
+
+            <c-input v-model="user.middle_name" v-validate="'alpha|min:2|max:255'"
+                     ll="Middle name" ph="Your middle name...">
+            </c-input>
+
+            <c-input v-model="user.last_name" v-validate="'required|alpha|min:2|max:255'"
+                     ll="Last name" ph="Your last name...">
+            </c-input>
+
+            <c-input v-model="user.birthday" component="datetime" ll="Birthday" ph="Your birthday..."></c-input>
 
             <div class="form-group">
-              <label>Middle name:</label>
-              <c-input v-model="user.middle_name" v-validate="'alpha|min:2|max:255'"
-                       ll="" ph="Your middle name...">
-              </c-input>
-            </div>
-
-            <div class="form-group">
-              <label>Last name:</label>
-              <c-input v-model="user.last_name" v-validate="'required|alpha|min:2|max:255'"
-                       ll="" ph="Your last name...">
-              </c-input>
-            </div>
-
-            <div class="form-group">
-              <label>Birthday:</label>
-              <c-input v-model="user.birthday" component="datetime" ll="" ph="Your birthday..."></c-input>
-            </div>
-            <div class="form-group">
-              <label>Sex:</label> <br>
+              <label>Sex</label> <br>
               <div class="checkboxes-group">
                 <c-radio v-model="user.sex" label="male" inline>
                   <span class="checkbox-label">
@@ -48,76 +37,54 @@
               </div>
             </div>
 
-            <div class="form-group">
-              <label>
-                Email:
-              </label>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="email-addon">
+            <c-input-group v-model="user.email" v-validate="'required|email'"
+                           ll="Email" ph="Type email...">
+              <template slot="prepend">
+                <span class="input-group-text">
                     <i class="fas fa-envelope"></i>
                   </span>
-                </div>
-                <input type="text" class="form-control"
-                       v-model="user.email"
-                       v-validate="'required|email'"
-                       placeholder="Type email..." aria-describedby="email-addon">
-              </div>
-            </div>
+              </template>
+            </c-input-group>
 
-            <div class="form-group">
-              <label>
-                Password:
-              </label>
-              <div class="input-group">
-                <div class="input-group-prepend">
-              <span class="input-group-text" id="password-addon">
-                <i class="fas fa-key"></i>
-              </span>
-                </div>
-                <input type="password" class="form-control"
-                       v-model="user.password"
-                       v-validate="'required|min:6|confirmed:password confirmation'"
-                       placeholder="Passsword..." aria-describedby="password-addon">
-                <div class="input-group-append">
-                  <span class="input-group-text btn-eye-wrapper">
+            <c-input-group v-model="user.password"
+                           v-validate="'required|min:6'"
+                           :type="passwordFieldType" ll="Password" ph="Type password..."
+                           :st="{borderRight: 'none'}">
+              <template slot="prepend">
+                <span class="input-group-text">
+                  <i class="fas fa-key"></i>
+                </span>
+              </template>
+              <template slot="append">
+                <span class="input-group-text btn-eye-wrapper">
                     <button class="btn-eye" type="button"
-                      @mousedown="showPassword($event)"
-                      @mouseup="hidePassword($event)"
-                    >
+                            @mousedown="passwordFieldType = 'text'"
+                            @mouseup="passwordFieldType = 'password'">
                       <i class="fas fa-eye"></i>
                     </button>
                   </span>
-                </div>
-              </div>
-            </div>
+              </template>
+            </c-input-group>
 
-            <div class="form-group">
-              <label>
-                Confirm password:
-              </label>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="confirm-password-addon">
-                    <i class="fas fa-key"></i>
-                  </span>
-                </div>
-                <input type="password" class="form-control"
-                       v-model="user.password_confirmation"
-                       v-validate="'required'"
-                       placeholder="Confirm password..." aria-describedby="confirm-password-addon">
-                <div class="input-group-append">
-                  <span class="input-group-text btn-eye-wrapper">
+          <c-input-group v-model="user.password_confirmation"
+                         v-validate="'required|min:6|confirmed:password'"
+                         :type="confirmPasswordFieldType" ll="Confirm password" ph="Confirm password..."
+                         :st="{borderRight: 'none'}">
+              <template slot="prepend">
+                <span class="input-group-text">
+                  <i class="fas fa-key"></i>
+                </span>
+              </template>
+              <template slot="append">
+                <span class="input-group-text btn-eye-wrapper">
                     <button class="btn-eye" type="button"
-                      @mousedown="showPassword($event)"
-                      @mouseup="hidePassword($event)"
-                    >
+                            @mousedown="confirmPasswordFieldType = 'text'"
+                            @mouseup="confirmPasswordFieldType = 'password'">
                       <i class="fas fa-eye"></i>
                     </button>
                   </span>
-                </div>
-              </div>
-            </div>
+              </template>
+            </c-input-group>
 
             <div class="link-wrapper">
               <router-link :to="{ name: 'Login' }" class="small ml-auto my-auto">
@@ -141,10 +108,16 @@
 </template>
 
 <script>
+  import CInputGroup from 'src/components/UIComponents/Inputs/InputGroup'
+
   export default {
+    components: {
+        CInputGroup
+    },
     data () {
       return {
         passwordFieldType: 'password',
+        confirmPasswordFieldType: 'password',
         user: null
       }
     },
@@ -154,15 +127,9 @@
     computed: {
       userIsReady: function () {
         return this.user !== null
-      },
-      passwordButtonText: function () {
-        return this.passwordFieldType === 'password' ? 'show' : 'hide'
       }
     },
     methods: {
-      switchVisibility () {
-        this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password'
-      },
       register () {
         this.$validator.validateAll()
           .then(result => result ? this.performRegisterRequest() : this.$unfortunately('Please check input'))
@@ -185,13 +152,6 @@
         user.birthday = this.$unix(user.birthday)
 
         return user
-      },
-      showPassword( e ) {
-          e.target.parentNode.parentNode.parentNode.previousElementSibling.type="text";
-          e.target.parentNode.parentNode.parentNode.previousElementSibling.style.borderRight="none";
-      },
-      hidePassword ( e ) {
-          e.target.parentNode.parentNode.parentNode.previousElementSibling.type="password";
       }
     }
   }
@@ -215,9 +175,9 @@
   }
 
   .card-body-content {
-    height: 860px;
+    height: auto;
     background-color: #fff;
-    padding: 5px 40px;
+    padding: 5px 40px 20px 40px;
     margin-top: 15px;
     border-radius: 15px;
   }
@@ -269,12 +229,17 @@
 
   .btn-info {
     margin-top: 15px;
-    background-color: #26a69a;
+    background-color: #26a69a !important;
     border: none;
   }
 
   .btn-info:hover {
-    background-color: #30d6c9;
+    background-color: #26b0a4 !important;
+  }
+
+  .btn-info:active,
+  .btn-info:visited {
+    background-color: #26a69a !important;
   }
 
   .flexible-wrapper input[type="text"] {

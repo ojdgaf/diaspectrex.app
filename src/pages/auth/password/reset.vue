@@ -7,81 +7,54 @@
             <img class="card-img-top" src="static/img/logo.png" alt="DiaSpectrEx">
           </div>
           <form v-on:submit.prevent="reset()">
-            <div class="form-group">
-              <label>
-                Email:
-              </label>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="email-addon">
+            <c-input-group v-model="payload.email" v-validate="'required|email'"
+                           ll="Email" ph="Type email...">
+              <template slot="prepend">
+                <span class="input-group-text">
                     <i class="fas fa-envelope"></i>
                   </span>
-                </div>
-                <input type="text" class="form-control"
-                       v-model="payload.email"
-                       v-validate="'required|email'"
-                       placeholder="Type email..." aria-describedby="email-addon">
-              </div>
-            </div>
+              </template>
+            </c-input-group>
 
-
-            <div class="form-group">
-              <label>
-                Password:
-              </label>
-              <div class="input-group">
-                <div class="input-group-prepend">
-              <span class="input-group-text" id="password-addon">
-                <i class="fas fa-key"></i>
-              </span>
-                </div>
-                <input type="password" class="form-control"
-                       v-model="payload.password"
-                       v-validate="'required|min:6|confirmed:password confirmation'"
-                       placeholder="Password..." aria-describedby="password-addon">
-                <div class="input-group-append">
-                  <span class="input-group-text btn-eye-wrapper">
+            <c-input-group v-model="payload.password"
+                           v-validate="'required|min:6'"
+                           :type="passwordFieldType" ll="Password" ph="Type password..."
+                           :st="{borderRight: 'none'}">
+              <template slot="prepend">
+                <span class="input-group-text">
+                  <i class="fas fa-key"></i>
+                </span>
+              </template>
+              <template slot="append">
+                <span class="input-group-text btn-eye-wrapper">
                     <button class="btn-eye" type="button"
-                      @mousedown="showPassword($event)"
-                      @mouseup="hidePassword($event)"
-                    >
+                            @mousedown="passwordFieldType = 'text'"
+                            @mouseup="passwordFieldType = 'password'">
                       <i class="fas fa-eye"></i>
                     </button>
                   </span>
-                </div>
-              </div>
-            </div>
+              </template>
+            </c-input-group>
 
-            <div class="form-group">
-              <label>
-                Confirm password:
-              </label>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="confirm-password-addon">
-                    <i class="fas fa-key"></i>
-                  </span>
-                </div>
-                <input type="password" class="form-control"
-                       v-model="payload.password_confirmation"
-                       v-validate="'required'"
-                       placeholder="Confirm password..." aria-describedby="confirm-password-addon">
-                <div class="input-group-append">
-                  <span class="input-group-text btn-eye-wrapper">
+            <c-input-group v-model="payload.password_confirmation"
+                           v-validate="'required|min:6|confirmed:password'"
+                           :type="confirmPasswordFieldType" ll="Confirm password" ph="Confirm password..."
+                           :st="{borderRight: 'none'}">
+              <template slot="prepend">
+                <span class="input-group-text">
+                  <i class="fas fa-key"></i>
+                </span>
+              </template>
+              <template slot="append">
+                <span class="input-group-text btn-eye-wrapper">
                     <button class="btn-eye" type="button"
-                            @mousedown="showPassword($event)"
-                            @mouseup="hidePassword($event)"
-                    >
+                            @mousedown="confirmPasswordFieldType = 'text'"
+                            @mouseup="confirmPasswordFieldType = 'password'">
                       <i class="fas fa-eye"></i>
                     </button>
                   </span>
-                </div>
-              </div>
-            </div>
-
-            <!--<button @click="switchVisibility" type="button" class="btn btn-dark btn-sm">
-              {{passwordButtonText}}
-            </button>-->
+              </template>
+            </c-input-group>
 
             <div class="text-center">
               <button class="btn btn-info btn-fill btn-block" type="submit">Reset password</button>
@@ -99,10 +72,16 @@
 </template>
 
 <script>
+  import CInputGroup from 'src/components/UIComponents/Inputs/InputGroup'
+
   export default {
+    components: {
+        CInputGroup
+    },
     data () {
       return {
         passwordFieldType: 'password',
+        confirmPasswordFieldType: 'password',
         payload: {
           email: '',
           password: '',
@@ -173,9 +152,9 @@
   }
 
   .card-body-content {
-    height: 430px;
+    height: auto;
     background-color: #fff;
-    padding: 5px 40px;
+    padding: 5px 40px 20px 40px;
     margin-top: 15px;
     border-radius: 15px;
   }
@@ -215,12 +194,17 @@
 
   .btn-info {
     margin-top: 15px;
-    background-color: #26a69a;
+    background-color: #26a69a !important;
     border: none;
   }
 
   .btn-info:hover {
-    background-color: #30d6c9;
+    background-color: #26b0a4 !important;
+  }
+
+  .btn-info:active,
+  .btn-info:visited {
+    background-color: #26a69a !important;
   }
 
   .flexible-wrapper input[type="text"] {

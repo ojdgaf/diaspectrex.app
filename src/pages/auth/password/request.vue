@@ -7,22 +7,14 @@
             <img class="card-img-top" src="static/img/logo.png" alt="DiaSpectrEx">
           </div>
           <form v-on:submit.prevent="request()">
-            <div class="form-group">
-              <label>
-                Email:
-              </label>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                <span class="input-group-text" id="email-addon">
-                  <i class="fas fa-envelope"></i>
-                </span>
-                </div>
-                <input type="text" class="form-control"
-                       v-model="payload.email"
-                       v-validate="'required|email'"
-                       placeholder="Type email..." aria-describedby="email-addon">
-              </div>
-            </div>
+            <c-input-group v-model="payload.email" v-validate="'required|email'"
+                           ll="Email" ph="Type email...">
+              <template slot="prepend">
+                <span class="input-group-text">
+                    <i class="fas fa-envelope"></i>
+                  </span>
+              </template>
+            </c-input-group>
 
             <div class="text-center">
               <button class="btn btn-info btn-fill btn-block" type="submit">
@@ -42,7 +34,12 @@
 </template>
 
 <script>
+  import CInputGroup from 'src/components/UIComponents/Inputs/InputGroup'
+
   export default {
+    components: {
+        CInputGroup
+    },
     data () {
       return {
         payload: {
@@ -82,9 +79,9 @@
   }
 
   .card-body-content {
-    height: 265px;
+    height: auto;
     background-color: #fff;
-    padding: 5px 40px;
+    padding: 5px 40px 20px 40px;
     margin-top: 90px;
     border-radius: 15px;
   }
@@ -124,12 +121,17 @@
 
   .btn-info {
     margin-top: 15px;
-    background-color: #26a69a;
+    background-color: #26a69a !important;
     border: none;
   }
 
   .btn-info:hover {
-    background-color: #30d6c9;
+    background-color: #26b0a4 !important;
+  }
+
+  .btn-info:active,
+  .btn-info:visited {
+    background-color: #26a69a !important;
   }
 
 </style>

@@ -11,12 +11,14 @@
                                 ]"
                             ></breadcrumbs>
                             <title-block
-                                    title="All patient cards"
-                                    :add-link="{ name: 'patient_cards.create' }"
+                                title="Create patient card"
                             ></title-block>
                         </template>
                         <div class="col-xs-12 col-md-8">
-
+                            <div class="form-group">
+                                <label>Code:</label>
+                                <input type="text" class="form-control" placeholder="Code...">
+                            </div>
                         </div>
                     </card>
                 </div>

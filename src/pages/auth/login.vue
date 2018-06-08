@@ -97,7 +97,7 @@
 
 <style scoped>
   .card {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
@@ -112,9 +112,9 @@
   }
 
   .card-body-content {
-    height: 380px;
+    height: auto;
     background-color: #fff;
-    padding: 5px 40px;
+    padding: 5px 40px 20px 40px;
     margin-top: 60px;
     border-radius: 15px;
   }
@@ -162,12 +162,17 @@
 
   .btn-info {
     margin-top: 15px;
-    background-color: #26a69a;
+    background-color: #26a69a !important;
     border: none;
   }
 
   .btn-info:hover {
-    background-color: #30d6c9;
+    background-color: #26b0a4 !important;
+  }
+
+  .btn-info:active,
+  .btn-info:visited {
+    background-color: #26a69a !important;
   }
 
   .btn-eye-wrapper {
