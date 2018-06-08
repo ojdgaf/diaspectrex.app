@@ -1,26 +1,25 @@
 <template>
   <div class="form-group">
     <label :for="id" class="control-label">{{ll}}</label>
-    <component v-bind="$attrs" @input="emit" @html="emit"
-               :is="component" :id="id" :value="value" :name="name" :placeholder="placeholder"
-               :class="componentClass" :input-class="componentInputClass">
-    </component>
+    <div class="input-group" :class="groupClass">
+      <div v-if="hasPrependSlot" class="input-group-prepend">
+        <slot name="prepend"></slot>
+      </div>
+      <component v-bind="$attrs" @input="emit" @html="emit"
+                 :is="component" :id="id" :value="value" :name="name" :placeholder="placeholder"
+                 :style="st">
+      </component>
+      <div v-if="hasAppendSlot" class="input-group-append">
+        <slot name="append"></slot>
+      </div>
+    </div>
     <div :class="feedbackClass">{{errors.first(scopedName)}}</div>
   </div>
 </template>
 
 <script>
-  /*
-    @html because wysiwyg emits only 'html' and 'change' events
-    ll instead of label because multiselect uses label for its specific needs
-    multiselect does not have input red border because there is neither SASS nor CSS file provided
-    computed name is for messages displayed by validation
-    component inherits vee validator so all its data will be available in parent component
-    input-class binding is for bootstrap-like datetime picker displaying
-  */
-
   export default {
-    name: 'CInput',
+    name: 'CInputGroup',
     inheritAttrs: false,
     inject: ['$validator'],
     props: {
@@ -37,11 +36,14 @@
         type: [Boolean, String],
         default: false
       },
+      st: {
+        default: null
+      },
       component: {
         type: String,
         default: 'b-form-input',
         validator: function (value) {
-          return ['b-form-input', 'datetime', 'multiselect', 'wysiwyg'].includes(value)
+          return ['b-form-input'].includes(value)
         }
       }
     },
@@ -76,36 +78,21 @@
 
         return this.prevState
       },
-      defaultClass: function () {
-        return 'form-control' + (this.state === null ? '' : this.state ? ' is-valid' : ' is-invalid')
+      hasPrependSlot: function () {
+        return ! ! this.$slots['prepend'];
       },
-      wysiwygClass: function () {
-        return this.state === null ? '' : this.state ? ' editr-valid' : 'editr-invalid'
+      hasAppendSlot: function () {
+        return ! ! this.$slots['append'];
       },
-      componentClass: function () {
-        switch (this.component) {
-          case 'b-form-input':
-            return this.defaultClass
-          case 'wysiwyg':
-            return this.wysiwygClass
-          default:
-            return ''
-        }
-      },
-      componentInputClass: function () {
-        switch (this.component) {
-          case 'datetime':
-            return this.defaultClass
-          default:
-            return ''
-        }
+      groupClass: function () {
+        return this.state === null ? '' : this.state ? 'addon-valid' : 'addon-invalid'
       },
       feedbackClass: function () {
         return {
           'invalid-feedback': true,
           'd-block': this.state === false
         }
-      }
+      },
     },
     methods: {
       emit (value) {
@@ -123,13 +110,17 @@
     font-size: 0.9em;
   }
 
-  .editr-valid {
-    border: 1px solid #28a745;
-    width: 100%;
+  .input-group .form-control {
+    height: auto !important;
   }
 
-  .editr-invalid {
+  .addon-valid {
+    border: 1px solid #28a745;
+    border-radius: 4px;
+  }
+
+  .addon-invalid {
     border: 1px solid #dc3545;
-    width: 100%;
+    border-radius: 4px;
   }
 </style>
