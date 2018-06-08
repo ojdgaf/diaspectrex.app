@@ -6,50 +6,34 @@
           <div class="logo-wrapper">
             <img class="card-img-top" src="static/img/logo.png" alt="DiaSpectrEx">
           </div>
-          <form v-on:submit.prevent="login()">
-            <div class="form-group">
-              <label>
-                Email:
-              </label>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="email-addon">
+          <form v-on:submit.prevent="login">
+            <c-input-group v-model="credentials.email" v-validate="'required|email'"
+                           ll="Email" ph="Type email...">
+              <template slot="prepend">
+                <span class="input-group-text">
                     <i class="fas fa-envelope"></i>
                   </span>
-                </div>
-                <input type="text" class="form-control"
-                       v-model="credentials.email"
-                       v-validate="'required|email'"
-                       placeholder="Type email..." aria-describedby="email-addon">
-              </div>
-            </div>
+              </template>
+            </c-input-group>
 
-            <div class="form-group">
-              <label>
-                Password:
-              </label>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="password-addon">
-                    <i class="fas fa-key"></i>
-                  </span>
-                </div>
-                <input type="password" class="form-control"
-                       v-model="credentials.password"
-                       v-validate="'required'"
-                       placeholder="Type password..." aria-describedby="password-addon">
-                <div class="input-group-append">
-                  <span class="input-group-text btn-eye-wrapper">
+            <c-input-group v-model="credentials.password" v-validate="'required|min:6'"
+                           :type="passwordFieldType" ll="Password" ph="Type password..."
+                           :st="{borderRight: 'none'}">
+              <template slot="prepend">
+                <span class="input-group-text">
+                  <i class="fas fa-key"></i>
+                </span>
+              </template>
+              <template slot="append">
+                <span class="input-group-text btn-eye-wrapper">
                     <button class="btn-eye" type="button"
-                            @mousedown="showPassword($event)"
-                            @mouseup="hidePassword($event)"
-                    >
+                            @mousedown="passwordFieldType = 'text'"
+                            @mouseup="passwordFieldType = 'password'">
                       <i class="fas fa-eye"></i>
                     </button>
                   </span>
-                </div>
-              </div>
-            </div>
+              </template>
+            </c-input-group>
 
             <div class="links-wrapper">
               <router-link :to="{ name: 'Password request' }">
@@ -76,9 +60,15 @@
 </template>
 
 <script>
+  import CInputGroup from 'src/components/UIComponents/Inputs/InputGroup'
+
   export default {
+    components: {
+      CInputGroup
+    },
     data () {
       return {
+        passwordFieldType: 'password',
         credentials: {
           email: 'bu@dx.com',
           password: 'secret'
@@ -98,16 +88,8 @@
           redirect: {
             name: 'Index'
           },
-          error: function () {
-          }
+          error: function () {}
         })
-      },
-      showPassword( e ) {
-          e.target.parentNode.parentNode.parentNode.previousElementSibling.type="text";
-          e.target.parentNode.parentNode.parentNode.previousElementSibling.style.borderRight="none";
-      },
-      hidePassword ( e ) {
-          e.target.parentNode.parentNode.parentNode.previousElementSibling.type="password";
       }
     }
   }
@@ -120,8 +102,7 @@
     flex-flow: column nowrap;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5) ), url('/static/img/background-1.jpg')
-                no-repeat center;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url('/static/img/background-1.jpg') no-repeat center;
     background-size: cover;
     border: none;
   }
@@ -142,7 +123,7 @@
     padding: 10px 15px;
     margin-bottom: 15px;
     text-align: center;
-    border-bottom: 2px solid #26a69a ;
+    border-bottom: 2px solid #26a69a;
   }
 
   .logo-wrapper img {
@@ -179,13 +160,6 @@
     color: #1DC7EA;
   }
 
-  label {
-    text-transform: uppercase;
-    color: #a3a3a3;
-    margin-bottom: 0.1rem;
-    font-size: 0.9em;
-  }
-
   .btn-info {
     margin-top: 15px;
     background-color: #26a69a;
@@ -194,10 +168,6 @@
 
   .btn-info:hover {
     background-color: #30d6c9;
-  }
-
-  input[type="password"] {
-    border-right: none;
   }
 
   .btn-eye-wrapper {
