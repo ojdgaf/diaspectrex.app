@@ -188,6 +188,7 @@
       },
       showPassword( e ) {
           e.target.parentNode.parentNode.parentNode.previousElementSibling.type="text";
+          e.target.parentNode.parentNode.parentNode.previousElementSibling.style.borderRight="none";
       },
       hidePassword ( e ) {
           e.target.parentNode.parentNode.parentNode.previousElementSibling.type="password";
