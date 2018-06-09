@@ -7,8 +7,8 @@ import TitleBlock from 'src/components/UIComponents/TitleBlock.vue'
 import AddressComponent from 'src/components/UIComponents/AddressComponent.vue'
 import Multiselect from 'vue-multiselect'
 import PhoneComponent from '@/components/UIComponents/PhoneComponent.vue'
-import bFormInput from 'bootstrap-vue/es/components/form-input/form-input';
-import bFormInvalidFeedback from 'bootstrap-vue/es/components/form/form-invalid-feedback';
+import bFormInput from 'bootstrap-vue/es/components/form-input/form-input'
+import bFormInvalidFeedback from 'bootstrap-vue/es/components/form/form-invalid-feedback'
 
 /**
  * Global components registration.

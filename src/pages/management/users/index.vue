@@ -6,7 +6,6 @@
           <card>
             <template slot="header">
               <breadcrumbs :links="[
-                { name: 'management', title: 'Management' },
                 { name: '', title: 'Users' }]">
               </breadcrumbs>
               <title-block title="Users management" :add-link="{ name: 'users.create' }">

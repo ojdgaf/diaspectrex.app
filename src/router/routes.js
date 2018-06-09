@@ -113,26 +113,19 @@ const routes = [
         component: Notifications
       },
       
-      // management
-      {
-        path: 'management',
-        name: 'management',
-        component: ManagementMain
-      },
-      
       // users
       {
-        path: 'management/users',
+        path: 'users',
         name: 'users.index',
         component: UsersIndex
       },
       {
-        path: 'management/users/create',
+        path: 'users/create',
         name: 'users.create',
         component: UsersCreate
       },
       {
-        path: 'management/users/:id(\\d+)/edit',
+        path: 'users/:id(\\d+)/edit',
         name: 'users.edit',
         component: UsersEdit,
         props: true
@@ -140,17 +133,17 @@ const routes = [
       
       // roles
       {
-        path: 'management/roles',
+        path: 'roles',
         name: 'roles.index',
         component: RolesIndex
       },
       {
-        path: 'management/roles/create',
+        path: 'roles/create',
         name: 'roles.create',
         component: RolesCreate
       },
       {
-        path: 'management/roles/:id(\\d+)/edit',
+        path: 'roles/:id(\\d+)/edit',
         name: 'roles.edit',
         component: RolesEdit,
         props: true

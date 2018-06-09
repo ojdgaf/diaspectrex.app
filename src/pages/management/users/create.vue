@@ -6,7 +6,6 @@
           <card>
             <template slot="header">
               <breadcrumbs :links="[
-                {name: 'management', title: 'Management'},
                 {name: 'users.index', title: 'Users'},
                 {name: '', title: 'Create'}]">
               </breadcrumbs>
