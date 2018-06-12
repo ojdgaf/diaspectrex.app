@@ -55,4 +55,16 @@
   }
 </script>
 
-<style scoped></style>
+<style scoped>
+
+  button.btn-default > a {
+     color: #888;
+  }
+
+  button.btn-default > a:hover,
+  button.btn-default > a:active,
+  button.btn-default > a:visited {
+    color: #868686;
+  }
+
+</style>

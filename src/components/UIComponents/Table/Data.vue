@@ -1,6 +1,18 @@
 <template>
   <td class="text-center">
-    <span v-if="overlarge" @click="alertValue">...</span>
+    <span v-if="overlarge" @click="alertValue">Click to see...</span>
+    <div v-else-if="_.isArray(value)">
+      <div v-for="el in value">
+        <div v-if="_.isObject(el)" class="text-left">
+          <p v-for="(value, key) in el">
+            {{ `${capitalizeFirstLetter(key)}: ${value}` }}
+          </p>
+        </div>
+        <div v-else>
+          <p>{{ el }}</p>
+        </div>
+      </div>
+    </div>
     <span v-else v-html="value"></span>
   </td>
 </template>
@@ -33,13 +45,19 @@
     },
     computed: {
       value: function () {
-        if (this.itemHasProperty())
-          return this.propertyValue();
+        if (this.itemHasProperty()) {
+            let propertyValue = this.propertyValue();
+
+            if ((this._.isArray(propertyValue) && propertyValue.length === 0) || propertyValue === null)
+                return this.empty;
+
+            return propertyValue;
+        }
 
         return this.empty
       },
       overlarge: function () {
-        return this.value && this.value.length > 100
+        return this.value && this.value.length > 100 && !this._.isArray(this.value)
       }
     },
     methods: {
@@ -78,6 +96,9 @@
       },
       filterStrings (value) {
         return this.strings.hasOwnProperty(value) ? this.strings[value] : value
+      },
+      capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
       }
     }
   }

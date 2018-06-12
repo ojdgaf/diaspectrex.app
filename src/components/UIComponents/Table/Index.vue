@@ -75,4 +75,9 @@
     justify-content: space-around;
     align-items: center;
   }
+
+  .flexible-operations-wrapper button{
+    margin: 5px;
+  }
+
 </style>

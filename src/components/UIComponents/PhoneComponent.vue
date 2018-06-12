@@ -80,7 +80,10 @@
         },
         computed: {
             computedPhones: function () {
-                return this.entityPhones || this.getDefaultPhonesArray();
+                if (this.entityPhones && this.entityPhones.length > 0)
+                    return this.entityPhones;
+
+                return  this.getDefaultPhonesArray();
             }
         }
     }

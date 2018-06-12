@@ -2,7 +2,7 @@
   <div class="form-group">
     <label :for="id" class="control-label">{{ll}}</label>
     <component v-bind="$attrs" @input="emit" @html="emit"
-               :is="component" :id="id" :value="value" :name="name" :placeholder="placeholder"
+               :is="component" :id="id" :value="value" :html="value" :name="name" :placeholder="placeholder"
                :class="componentClass" :input-class="componentInputClass">
     </component>
     <div :class="feedbackClass">{{errors.first(scopedName)}}</div>

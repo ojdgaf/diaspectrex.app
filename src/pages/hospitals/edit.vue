@@ -15,14 +15,12 @@
                         </template>
                         <div class="col-12">
                             <div class="col-8">
-                                <div class="form-group">
-                                    <label>Name:</label>
-                                    <input type="text" v-model="hospital.name" class="form-control" placeholder="Name...">
-                                </div>
-                                <div class="form-group">
-                                    <label>Description:</label>
-                                    <wysiwyg v-model="hospital.description"></wysiwyg>
-                                </div>
+                                <c-input v-model="hospital.name" v-validate="'required'"
+                                         ll="Name" ph="Name..." >
+                                </c-input>
+                                <c-input v-model="hospital.description"
+                                         ll="Description" ph component="wysiwyg">
+                                </c-input>
                                 <div class="form-group">
                                     <b-card no-body>
                                         <b-tabs card>

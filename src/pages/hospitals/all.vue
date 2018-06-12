@@ -15,42 +15,11 @@
                                 :add-link="{ name: 'hospitals.create' }"
                             ></title-block>
                         </template>
-                        <div class="table-responsive">
-                            <table class="table table-hover table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                        <th>Address</th>
-                                        <th>Operations</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="hospital in hospitals">
-                                        <td>{{ hospital.id }}</td>
-                                        <td>{{ hospital.name }}</td>
-                                        <td>{{ hospital.description }}</td>
-                                        <td>
-                                            <span v-if="hospital.address">{{ hospital.address.full }}</span>
-                                            <span v-else>Unknown</span>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="text-left">
-                                                <button class="btn btn-info">
-                                                    <router-link :to="{name: 'hospitals.edit', params: { id: hospital.id} }">
-                                                      <i class="fas fa-pencil-alt"></i>
-                                                    </router-link>
-                                                </button>
-                                                <button class="btn btn-danger" @click="deleteHospital(hospital.id)">
-                                                  <i class="fas fa-trash"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <c-table class="table table-hover table-striped table-responsive"
+                                 :columns="tableColumns" :data="hospitals" :buttons="tableButtons">
+                        </c-table>
+
+
                     </card>
                 </div>
             </div>
@@ -59,10 +28,34 @@
 </template>
 
 <script>
+    import CTable from 'src/components/UIComponents/Table/Index'
+
     export default {
+        components: {
+            CTable
+        },
         data () {
             return {
-                hospitals: null
+                hospitals: null,
+                tableColumns: [
+                    'ID', 'Name', 'Description',
+                    {display: 'Address', actual: 'address.full'},
+                    'Phones'
+                ],
+                tableButtons: [
+                    {
+                        route: {
+                            name: 'hospitals.edit',
+                            params: {id: 'id'}
+                        },
+                        display: `<i class="fas fa-pencil-alt"></i>`
+                    },
+                    {
+                        method: this.deleteHospital,
+                        class: 'btn-danger',
+                        display: `<i class="fas fa-trash"></i>`
+                    }
+                ]
             }
         },
         created () {
@@ -74,11 +67,11 @@
 
                 return response.data;
             },
-            async deleteHospital(id) {
+            async deleteHospital(hospital) {
                 this.$askForConfirmation('You are trying to delete hospital')
                     .then(async (deletingApproved) => {
                         if (deletingApproved) {
-                            const response = await this.axios.delete(`/hospitals/${id}`);
+                            const response = await this.axios.delete(`/hospitals/${hospital.id}`);
 
                             if (response.data.success)
                                 this.hospitals = response.data.hospitals;
@@ -88,3 +81,22 @@
         }
     }
 </script>
+
+<style scoped>
+
+    p {
+        margin: 0;
+    }
+
+    .flexible-button-wrapper {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .flexible-button-wrapper button{
+        margin: 5px;
+    }
+
+</style>

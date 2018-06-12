@@ -15,44 +15,10 @@
                                     :add-link="{ name: 'patient_cards.create' }"
                             ></title-block>
                         </template>
-                        <div class="table-responsive">
-                            <table class="table table-hover table-striped">
-                                <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Code</th>
-                                    <th>Patient</th>
-                                    <th>Patient type</th>
-                                    <th>Allergies</th>
-                                    <th>Diseases</th>
-                                    <th>Operations</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr v-for="patientCard in patientCards">
-                                    <td>{{ patientCard.id }}</td>
-                                    <td>{{ patientCard.code }}</td>
-                                    <!-- TODO define some data to render here fio + birthday, for example -->
-                                    <td>{{ patientCard.patient }}</td>
-                                    <td>{{ patientCard.patient_type }}</td>
-                                    <td>{{ patientCard.allergies }}</td>
-                                    <td>{{ patientCard.diseases }}</td>
-                                    <td class="text-center">
-                                        <div class="text-left">
-                                            <button class="btn btn-info">
-                                                <router-link :to="{name: 'patient_cards.edit', params: { id: patientCard.id} }">
-                                                  <i class="fas fa-pencil-alt"></i>
-                                                </router-link>
-                                            </button>
-                                            <button class="btn btn-danger" @click="deletePatientCard(patientCard.id)">
-                                              <i class="fas fa-trash"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <c-table class="table table-hover table-striped table-responsive"
+                                 :columns="tableColumns" :data="patientCards" :buttons="tableButtons">
+                        </c-table>
+
                     </card>
                 </div>
             </div>
@@ -61,9 +27,42 @@
 </template>
 
 <script>
+import CTable from 'src/components/UIComponents/Table/Index'
+
     export default {
+        components: {
+            CTable
+        },
         data () {
             return {
+                tableColumns: [
+                    'ID', 'Code',
+                    {display: 'Patient', actual: 'patient.name'},
+                    {display: 'Patient type', actual: 'patient_type.display_name'},
+                    'Allergies', 'Diseases'
+                ],
+                tableButtons: [
+                    {
+                        route: {
+                            name: 'patient_cards.show',
+                            params: {id: 'id'}
+                        },
+                        class: 'btn-default',
+                        display: `<i class="fas fa-eye"></i>`
+                    },
+                    {
+                        route: {
+                            name: 'patient_cards.edit',
+                            params: {id: 'id'}
+                        },
+                        display: `<i class="fas fa-pencil-alt"></i>`
+                    },
+                    {
+                        method: this.deletePatientCard,
+                        class: 'btn-danger',
+                        display: `<i class="fas fa-trash"></i>`
+                    }
+                ],
                 patientCards: null
             }
         },
@@ -76,16 +75,16 @@
 
                 return response.data;
             },
-            async deletePatientCard(id) {
-                /*this.$askForConfirmation('You are trying to delete patient card')
+            async deletePatientCard(patientCard) {
+                this.$askForConfirmation('You are trying to delete patient card')
                     .then(async (deletingApproved) => {
                         if (deletingApproved) {
-                            const response = await this.axios.delete(`/patient_cards/${id}`);
+                            const response = await this.axios.delete(`/patient-cards/${patientCard.id}`);
 
                             if (response.data.success)
-                                this.hospitals = response.data.patient_cards;
+                                this.patientCards = response.data.patient_cards;
                         }
-                    });*/
+                    });
             }
         }
     }

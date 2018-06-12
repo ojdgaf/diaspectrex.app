@@ -181,6 +181,12 @@ const routes = [
         props: true
       },
       {
+          path: 'patient-cards/:id(\\d+)',
+          name: 'patient_cards.show',
+          component: PatientCardsEdit,
+          props: true
+      },
+      {
         path: 'patient-cards/:id(\\d+)/edit',
         name: 'patient_cards.edit',
         component: PatientCardsEdit,
