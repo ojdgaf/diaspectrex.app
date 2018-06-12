@@ -39,9 +39,16 @@ import PatientCardsIndex from '@/pages/patient_cards/index.vue'
 import PatientCardsCreate from '@/pages/patient_cards/create.vue'
 import PatientCardsEdit from '@/pages/patient_cards/edit.vue'
 
+// Services
 import ServicesIndex from 'src/pages/services/index'
 import ServicesCreate from 'src/pages/services/create'
 import ServicesEdit from 'src/pages/services/edit'
+
+// Classifiers
+import ClassifiersIndex from 'src/pages/classifiers/index'
+
+// Diagnostic groups
+import DiagnosticGroupsIndex from 'src/pages/diagnostic_groups/index'
 
 const routes = [
   {
@@ -209,6 +216,20 @@ const routes = [
         name: 'services.edit',
         component: ServicesEdit,
         props: true
+      },
+
+      // classifiers
+      {
+        path: 'classifiers',
+        name: 'classifiers.index',
+        component: ClassifiersIndex
+      },
+
+      // diagnostic groups
+      {
+        path: 'diagnostic-groups',
+        name: 'diagnostic_groups.index',
+        component: DiagnosticGroupsIndex
       }
     ]
   },

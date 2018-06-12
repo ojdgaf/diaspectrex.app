@@ -23,17 +23,17 @@
         <p>Patient cards</p>
       </sidebar-link>
 
-      <sidebar-link to="/admin/services">
+      <sidebar-link :to="{name: 'services.index'}">
         <i class="far fa-money-bill-alt"></i>
         <p>Services</p>
       </sidebar-link>
 
-      <sidebar-link to="/admin/classifiers">
+      <sidebar-link :to="{name: 'classifiers.index'}">
         <i class="fas fa-sitemap"></i>
         <p>Classifiers</p>
       </sidebar-link>
 
-      <sidebar-link to="/admin/diagnostic-groups">
+      <sidebar-link :to="{name: 'diagnostic_groups.index'}">
         <i class="fas fa-object-group"></i>
         <p>Diagnostic groups</p>
       </sidebar-link>
