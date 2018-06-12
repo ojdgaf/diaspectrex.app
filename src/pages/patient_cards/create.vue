@@ -15,7 +15,7 @@
                                 title="Create patient card"
                             ></title-block>
                         </template>
-                        <div class="col-xs-12 col-md-8">
+                        <div class="col-xs-12 col-md-9">
                             <c-input v-model="patientCard.code" v-validate="'required'"
                                      ll="Code" ph="Code..." >
                             </c-input>

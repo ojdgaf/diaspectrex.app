@@ -13,36 +13,34 @@
                                 title="Edit hospital"
                             ></title-block>
                         </template>
-                        <div class="col-12">
-                            <div class="col-8">
-                                <c-input v-model="hospital.name" v-validate="'required'"
-                                         ll="Name" ph="Name..." >
-                                </c-input>
-                                <c-input v-model="hospital.description"
-                                         ll="Description" ph component="wysiwyg">
-                                </c-input>
-                                <div class="form-group">
-                                    <b-card no-body>
-                                        <b-tabs card>
-                                            <b-tab title="Address">
-                                                <address-component
-                                                    ref="addressComponent"
-                                                    :entity-address="hospital.address"
-                                                ></address-component>
-                                            </b-tab>
-                                            <b-tab title="Phones" >
-                                                <phone-component
-                                                    ref="phonesComponent"
-                                                    :entity-phones="hospital.phones"
-                                                ></phone-component>
-                                            </b-tab>
-                                        </b-tabs>
-                                    </b-card>
-                                </div>
-                                <div class="text-right">
-                                    <button class="btn btn-success btn-fill"
-                                            @click="updateHospital">Edit</button>
-                                </div>
+                        <div class="col-xs-12 col-md-9">
+                            <c-input v-model="hospital.name" v-validate="'required'"
+                                     ll="Name" ph="Name..." >
+                            </c-input>
+                            <c-input v-model="hospital.description"
+                                     ll="Description" ph component="wysiwyg">
+                            </c-input>
+                            <div class="form-group">
+                                <b-card no-body>
+                                    <b-tabs card>
+                                        <b-tab title="Address">
+                                            <address-component
+                                                ref="addressComponent"
+                                                :entity-address="hospital.address"
+                                            ></address-component>
+                                        </b-tab>
+                                        <b-tab title="Phones" >
+                                            <phone-component
+                                                ref="phonesComponent"
+                                                :entity-phones="hospital.phones"
+                                            ></phone-component>
+                                        </b-tab>
+                                    </b-tabs>
+                                </b-card>
+                            </div>
+                            <div class="text-right">
+                                <button class="btn btn-success btn-fill"
+                                        @click="updateHospital">Edit</button>
                             </div>
                         </div>
                     </card>

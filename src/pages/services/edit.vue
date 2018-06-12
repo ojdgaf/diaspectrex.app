@@ -7,7 +7,7 @@
             <template slot="header">
               <breadcrumbs :links="[
                 {name: 'services.index', title: 'Services'},
-                {name: '', title: 'Edit'}]">
+                {name: '', title: 'Edit service'}]">
               </breadcrumbs>
             </template>
             <input-group v-if="serviceIsReady" :service="service"

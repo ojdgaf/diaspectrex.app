@@ -5,7 +5,7 @@ const customAxios = {
   install (Vue) {
     Vue.use(VueAxios, axios)
     
-    Vue.axios.defaults.baseURL = 'http://api.diaspectrex.test'
+    Vue.axios.defaults.baseURL = 'http://127.0.0.1:8080'
     
     Vue.axios.interceptors.response.use(
       (response) => {

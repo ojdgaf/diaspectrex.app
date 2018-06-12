@@ -13,7 +13,7 @@
                                 title="Create hospital"
                             ></title-block>
                         </template>
-                        <div class="col-8">
+                        <div class="col-xs-12 col-md-9">
                             <c-input v-model="hospital.name" v-validate="'required'"
                                      ll="Name" ph="Name..." >
                             </c-input>
