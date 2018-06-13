@@ -72,7 +72,7 @@
   .flexible-operations-wrapper {
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
   }
 

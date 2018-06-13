@@ -7,7 +7,7 @@
                 </router-link>
             </li>
             <li v-for="link in links">
-                <router-link :to="{name: link.name}">
+                <router-link :to="{ name: link.name, params: link.params }">
                     {{ link.title }}
                 </router-link>
             </li>

@@ -71,7 +71,7 @@
         created () {
             this.getPatients().then(patients => this.patients = patients);
             this.getPatientTypes().then(patientTypes => this.patientTypes = patientTypes);
-            this.getCard(this.id).then(card => this.patientCard = card);
+            this.getCard().then(card => this.patientCard = card);
         },
         methods: {
             async updateCard () {
@@ -82,8 +82,8 @@
                 else
                     this.$unfortunately('Error occurs when trying to update patient\'s card!');
             },
-            getCard (id) {
-                return this.axios.get(`/patient-cards/${id}`).then(res => res.data);
+            getCard () {
+                return this.axios.get(`/patient-cards/${this.id}`).then(res => res.data);
             },
             getPatients () {
                 return this.axios.get(`/users?role=patient`).then(res => res.data);

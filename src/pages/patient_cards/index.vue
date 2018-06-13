@@ -18,7 +18,6 @@
                         <c-table class="table table-hover table-striped table-responsive"
                                  :columns="tableColumns" :data="patientCards" :buttons="tableButtons">
                         </c-table>
-
                     </card>
                 </div>
             </div>
@@ -27,7 +26,7 @@
 </template>
 
 <script>
-import CTable from 'src/components/UIComponents/Table/Index'
+    import CTable from 'src/components/UIComponents/Table/Index'
 
     export default {
         components: {

@@ -37,7 +37,7 @@
         for (let param in this.button.route.params) {
           params[param] = this.item[this.button.route.params[param]]
         }
-
+        
         return {
           name: this.button.route.name,
           params

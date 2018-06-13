@@ -35,9 +35,10 @@ import HospitalsCreate from '@/pages/hospitals/create.vue'
 import HospitalsEdit from '@/pages/hospitals/edit.vue'
 
 // Patient cards
-import PatientCardsIndex from '@/pages/patient_cards/index.vue'
-import PatientCardsCreate from '@/pages/patient_cards/create.vue'
-import PatientCardsEdit from '@/pages/patient_cards/edit.vue'
+import PatientCardsIndex from '@/pages/patient_cards/index'
+import PatientCardsCreate from '@/pages/patient_cards/create'
+import PatientCardsEdit from '@/pages/patient_cards/edit'
+import PatientCardsShow from '@/pages/patient_cards/show'
 
 // Services
 import ServicesIndex from 'src/pages/services/index'
@@ -49,6 +50,10 @@ import ClassifiersIndex from 'src/pages/classifiers/index'
 
 // Diagnostic groups
 import DiagnosticGroupsIndex from 'src/pages/diagnostic_groups/index'
+
+// Examinations
+import ExaminationsCreate from 'src/pages/examinations/create'
+import ExaminationsShow from 'src/pages/examinations/show'
 
 const routes = [
   {
@@ -174,32 +179,7 @@ const routes = [
         component: HospitalsEdit,
         props: true
       },
-      
-      // patient cards
-      {
-        path: 'patient-cards',
-        name: 'patient_cards.index',
-        component: PatientCardsIndex
-      },
-      {
-        path: 'patient-cards/create',
-        name: 'patient_cards.create',
-        component: PatientCardsCreate,
-        props: true
-      },
-      {
-          path: 'patient-cards/:id(\\d+)',
-          name: 'patient_cards.show',
-          component: PatientCardsEdit,
-          props: true
-      },
-      {
-        path: 'patient-cards/:id(\\d+)/edit',
-        name: 'patient_cards.edit',
-        component: PatientCardsEdit,
-        props: true
-      },
-      
+
       // services
       {
         path: 'services',
@@ -230,7 +210,49 @@ const routes = [
         path: 'diagnostic-groups',
         name: 'diagnostic_groups.index',
         component: DiagnosticGroupsIndex
-      }
+      },
+
+        //seances
+
+
+      // examinations
+      {
+          path: 'patient-cards/:cardId(\\d+)/examinations/create',
+          name: 'examinations.create',
+          component: ExaminationsCreate,
+          props: true
+      },
+      {
+          path: 'patient-cards/:cardId(\\d+)/examinations/:id(\\d+)',
+          name: 'examinations.show',
+          component: ExaminationsShow,
+          props: true
+      },
+
+      // patient cards
+      {
+          path: 'patient-cards',
+          name: 'patient_cards.index',
+          component: PatientCardsIndex
+      },
+      {
+          path: 'patient-cards/create',
+          name: 'patient_cards.create',
+          component: PatientCardsCreate,
+          props: true
+      },
+      {
+          path: 'patient-cards/:id(\\d+)',
+          name: 'patient_cards.show',
+          component: PatientCardsShow,
+          props: true
+      },
+      {
+          path: 'patient-cards/:id(\\d+)/edit',
+          name: 'patient_cards.edit',
+          component: PatientCardsEdit,
+          props: true
+      },
     ]
   },
   {path: '*', component: NotFound}
